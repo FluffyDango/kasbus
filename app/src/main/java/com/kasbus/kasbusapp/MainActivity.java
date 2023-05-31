@@ -2,65 +2,52 @@ package com.kasbus.kasbusapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String API_URL = "http://api.kasbus.lt/ratings/lgVf470llCAsb22TJA0f";
+    ListView superListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new FetchData().execute();
+        superListView = findViewById(R.id.superListView);
+
+        getSuperHeroes();
     }
 
-    private class FetchData extends AsyncTask<Void, Void, String> {
+    private void getSuperHeroes() {
+        Call<List<Subject>> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes();
+        call.enqueue(new Callback<List<Subject>>() {
+            @Override
+            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
+                List<Subject> myHeroList = response.body();
+                String[] oneHeroes = new String[myHeroList.size()];
 
-        @Override
-        protected String doInBackground(Void... params) {
-            String data = "";
-            try {
-                URL url = new URL(API_URL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line = "";
-                while (line != null) {
-                    line = bufferedReader.readLine();
-                    data = data + line;
+                for (int i = 0; i < myHeroList.size(); i++) {
+                    oneHeroes[i] = myHeroList.get(i).getName();
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-            return data;
-        }
 
-        @Override
-        protected void onPostExecute(String data) {
-            if (data == null) {
-                Log.e("Error", "Error fetching data");
-            } else {
-                // Here 'data' string contains the whole JSON data fetched from server
-                // Handle this JSON as per your need
-                Log.i("Data", data);
+                superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
             }
-        }
+
+            @Override
+            public void onFailure(Call<List<Subject>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 }
 
