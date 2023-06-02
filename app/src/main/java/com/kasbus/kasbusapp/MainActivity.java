@@ -4,49 +4,52 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.util.List;
+import com.kasbus.kasbusapp.Containers.Ratings;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    ListView superListView;
+    TextView responseText;
+    APIInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("Test", "Message");
 
-        superListView = findViewById(R.id.superListView);
+        responseText = (TextView) findViewById(R.id.name);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        getSuperHeroes();
-    }
-
-    private void getSuperHeroes() {
-        Call<List<Subject>> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes();
-        call.enqueue(new Callback<List<Subject>>() {
+        Call<Ratings> call = apiInterface.getSubjectRatings();
+        call.enqueue(new Callback<Ratings>() {
             @Override
-            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
-                List<Subject> myHeroList = response.body();
-                String[] oneHeroes = new String[myHeroList.size()];
+            public void onResponse(Call<Ratings> call, Response<Ratings> response) {
+                Log.d("CONNECTION",response.code()+"");
 
-                for (int i = 0; i < myHeroList.size(); i++) {
-                    oneHeroes[i] = myHeroList.get(i).getName();
-                }
+                String displayResponse = "";
 
-                superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
+                Ratings resource = response.body();
+                String category1 = Double.toString(resource.category1);
+                String category2 = Double.toString(resource.category2);
+                String category3 = Double.toString(resource.category3);
+                String category4 = Double.toString(resource.category4);
+
+                displayResponse = category1 + " " + category2 + " " + category3 + " " + category4;
+
+                responseText.setText(displayResponse);
             }
 
             @Override
-            public void onFailure(Call<List<Subject>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<Ratings> call, Throwable t) {
+                Log.d("CONNECTION", "Failed to get Ratings");
+                call.cancel();
             }
-
         });
     }
 }
