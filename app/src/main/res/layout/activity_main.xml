@@ -7,60 +7,195 @@
     android:background="#9F1239"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/APIbutton"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#d9dbdd"
-        android:textColor="#000000"
-        android:layout_marginStart="147dp"
-        android:layout_marginLeft="147dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginRight="148dp"
-        android:layout_marginBottom="622dp"
-        android:text="BUS NAME      FACULTY      LECTURERS"
-        android:textSize="15sp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_background"
+        android:hint="Search by name..."
+        android:inputType="text"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/something"
-        android:layout_width="88dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="174dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="530dp"
-        android:background="#F8F8F8"
-        android:text="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="113dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="486dp"
-        android:background="#FFFFFF"
-        android:text="0"
-        android:textColor="#0C0C0C"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Block 0 -->
+<LinearLayout
+        android:id="@+id/block0"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/something"
-        app:layout_constraintTop_toBottomOf="@+id/APIbutton" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar">
+
+        <TextView
+            android:id="@+id/title0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="BUS NAME"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="FACULTY"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:layout_weight="1" />
+
+        <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="LECTURERS"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Block 1 -->
+    <LinearLayout
+        android:id="@+id/block1"
+        android:layout_width="375dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/rounded_background"
+        app:layout_constraintTop_toBottomOf="@+id/block0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/Aesthetics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Aesthetics"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="FILF"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Asist. Dr. Jonas Čiurlionis"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Block 2 -->
+    <LinearLayout
+        android:id="@+id/block2"
+            android:layout_width="375dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/AppliedSocialPsychology"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Applied Social Psychology"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="FILF"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Asist. Dr. Olga Zamalijeva Dr. Tomas Maceina"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Block 3 -->
+    <LinearLayout
+        android:id="@+id/block3"
+            android:layout_width="375dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/AppliedSocialPsychology"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Applied Social Psychology"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="FILF"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Asist. dr. Joshua Moreton asist. dr. Joshua Moreton"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
