@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9F1239">
+
+<!--    <TextView-->
+<!--            android:id="@+id/subject_name"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="Aesthetics"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <TextView-->
+<!--            android:id="@+id/faculty"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="(FILF)"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/subject_name"-->
+<!--            app:layout_constraintStart_toStartOf=""-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--    <TextView-->
+<!--            android:id="@+id/lecturer_name"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="Asist. Dr. Jonas Čiurlionis"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="14sp"-->
+<!--            android:paddingVertical="10dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/subject_name"/>-->
+
+<!--    <TextView-->
+<!--            android:id="@+id/credits"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="Amount of credits: "-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/lecturer_name"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/language"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="Language: "-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/credits"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/hours"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:text="Amount of hours: "-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="14sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/language"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="220dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginTop="45dp"-->
+<!--            android:gravity="right"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="10dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:background="@drawable/rounded_background"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/hours"-->
+<!--            app:layout_constraintStart_toStartOf=""-->
+<!--            app:layout_constraintTop_toBottomOf="@id/faculty">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/button_text"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="sans-serif"-->
+<!--                android:textSize="14sp"-->
+<!--                android:text="Go to an official site description"-->
+<!--                android:layout_weight="1"-->
+<!--                />-->
+<!--        </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

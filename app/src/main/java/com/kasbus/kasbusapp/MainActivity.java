@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.kasbus.kasbusapp.Containers.Ratings;
+import com.kasbus.kasbusapp.Containers.Subject;
+
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 
@@ -19,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         APICalls api_calls = new APICalls();
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
 
-//        TextView responseText = (TextView) findViewById(R.id.Aesthetics);
-//        api_calls.setRatings(apiInterface.getSubjectRatings(), responseText);
+//        String[] idList = api_calls.getIdList();
+        List<Subject> subjectList = api_calls.getSubjectsEN();
+
+        TextView responseText = (TextView) findViewById(R.id.Aesthetics);
+
+        TextView text = (TextView) findViewById(R.id.AppliedSocialPsychology);
+
     }
 }
 

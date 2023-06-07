@@ -198,4 +198,180 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <!-- Block 4 -->
+    <LinearLayout
+        android:id="@+id/block4"
+            android:layout_width="375dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/ArtandPolitics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Art and Politics"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TSPMI"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Prof. Dr. (HP) Alvydas Jokubaitis J. Asist. Dr. Viktorija Rimaitė-Beržiūnienė"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+<!-- Block 5 -->
+    <LinearLayout
+        android:id="@+id/block5"
+            android:layout_width="375dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/AstronomyExploringTimeandSpace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Astronomy: Exploring Time and Space"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="FF"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Doc. Dr. Šarūnas Mikolaitis Prof. Habil. dr. Gražina TautvaišienėAsist. Dr. Arnas Drazdauskas Vyresn. M. D. Dr. Renata MinkevičiūtėDoc. Dr. Edita Stonkutė"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+<!-- Block 6 -->
+    <LinearLayout
+        android:id="@+id/block6"
+            android:layout_width="375dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/BasicsofAnimalBehaviour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Basics of Animal Behaviour"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="GMC"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Asist. Dr. Irena Nedveckytė Asist. Dr. Irena Nedveckytė"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+<!-- Block 7 -->
+    <LinearLayout
+        android:id="@+id/block7"
+            android:layout_width="375dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/rounded_background"
+            app:layout_constraintTop_toBottomOf="@+id/block6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/BiologicalEvoliution"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Biological Evoliution"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_faculty_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="GMC"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_lecturers_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Doc. Dr. Andrius Petrašiūnas Doc. Dr. Andrius Petrašiūnas"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
