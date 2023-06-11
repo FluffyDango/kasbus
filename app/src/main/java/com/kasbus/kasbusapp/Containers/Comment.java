@@ -2,7 +2,7 @@ package com.kasbus.kasbusapp.Containers;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Comments {
+public class Comment {
     @SerializedName("content")
     private String content;
     @SerializedName("faculty")

@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Ratings {
     @SerializedName("category1")
-    private Double category1;
+    private Double category1;   // Interest
     @SerializedName("category2")
-    private Double category2;
+    private Double category2;   // Amount of work
     @SerializedName("category3")
-    private Double category3;
+    private Double category3;   // Actuality
     @SerializedName("category4")
-    private Double category4;
+    private Double category4;   // Teaching
 
     public Double getCategory1(){
         return category1;

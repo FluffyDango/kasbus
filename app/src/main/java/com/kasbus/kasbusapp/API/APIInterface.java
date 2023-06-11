@@ -1,4 +1,4 @@
-package com.kasbus.kasbusapp;
+package com.kasbus.kasbusapp.API;
 
 import com.kasbus.kasbusapp.Containers.*;
 
@@ -18,7 +18,7 @@ public interface APIInterface {
     @GET("/subjects/lt/{id}")
     Call<List<Subject>> getOneSubjectLT(@Path("id") String ID);
     @GET("/comments/{id}")
-    Call<Comments> getSubjectComments(@Path("id") String ID);
+    Call<Comment> getSubjectComments(@Path("id") String ID);
     @GET("ratings/{id}")
     Call<Ratings> getSubjectRatings(@Path("id") String ID);
 }

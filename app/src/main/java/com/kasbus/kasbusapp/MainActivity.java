@@ -5,15 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.kasbus.kasbusapp.Containers.Ratings;
-import com.kasbus.kasbusapp.Containers.Subject;
-
-import java.util.HashMap;
-import java.util.List;
-
-import retrofit2.Call;
+import com.kasbus.kasbusapp.API.APICalls;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -96,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         APICalls api_calls = new APICalls();
 
-        String[] names = api_calls.getNames();
+//        String[] names = api_calls.getNames();
 
 //        List<Subject> subjectList = api_calls.getSubjectsEN();
 
