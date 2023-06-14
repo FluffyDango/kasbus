@@ -10,7 +10,7 @@ public class Subject {
     @SerializedName("faculty")
     private String faculty;
     @SerializedName("credits")
-    private int credits;
+    private Integer credits;
     @SerializedName("delivery")
     private String delivery;
     @SerializedName("lecturers")
@@ -18,9 +18,9 @@ public class Subject {
     @SerializedName("language")
     private String language;
     @SerializedName("exam")
-    private boolean exam;
+    private Boolean exam;
     @SerializedName("hours")
-    private int hours;
+    private Integer hours;
     @SerializedName("link")
     private String link;
 
@@ -33,7 +33,7 @@ public class Subject {
     public String getFaculty() {
         return faculty;
     }
-    public int getCredits() {
+    public Integer getCredits() {
         return credits;
     }
     public String getDelivery() {
@@ -48,7 +48,7 @@ public class Subject {
     public Boolean getExam() {
         return exam;
     }
-    public int getHours() {
+    public Integer getHours() {
         return hours;
     }
     public String getLink() {
