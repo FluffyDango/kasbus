@@ -3,10 +3,10 @@ package com.kasbus.kasbusapp;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SecondActivity extends AppCompatActivity {
+public class SubjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.subject_ui);
+        setContentView(R.layout.activity_subject);
     }
 }

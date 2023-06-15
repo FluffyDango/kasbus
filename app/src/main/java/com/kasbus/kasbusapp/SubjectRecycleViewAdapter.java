@@ -1,29 +1,33 @@
 package com.kasbus.kasbusapp;
 
+
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kasbus.kasbusapp.Containers.Subject;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
+public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecycleViewAdapter.ViewHolder> {
 
     private List<Subject> subjects;
 
-    public SubjectAdapter(List<Subject> subjects) {
+    public SubjectRecycleViewAdapter(List<Subject> subjects) {
         this.subjects = subjects;
     }
 
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public LinearLayout containerLayout;
         public TextView nameTextView;
         public TextView facultyTextView;
         public TextView lecturersTextView;
@@ -31,6 +35,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
 
+            containerLayout = (LinearLayout) itemView.findViewById(R.id.bus_container);
             nameTextView = (TextView) itemView.findViewById(R.id.bus_name);
             facultyTextView = (TextView) itemView.findViewById(R.id.faculty);
             lecturersTextView = (TextView) itemView.findViewById(R.id.lecturers);
@@ -38,7 +43,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
     }
 
     @Override
-    public SubjectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SubjectRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -52,20 +57,23 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(SubjectAdapter.ViewHolder holder, int position) {
-        // Get the data model based on position
+    public void onBindViewHolder(SubjectRecycleViewAdapter.ViewHolder holder, int position) {
         Subject subject = subjects.get(position);
 
-        // Set item views based on your views and data model
         holder.nameTextView.setText(subject.getName());
         holder.facultyTextView.setText(subject.getFaculty());
         holder.lecturersTextView.setText(subject.getLecturers());
-//        Button button = holder.messageButton;
-//        button.setText(subject.getExam() ? "Message" : "Offline");
-//        button.setEnabled(subject.getExam());
+
+        holder.containerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, SubjectActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
-//     Returns the total count of items in the list
     @Override
     public int getItemCount() {
         return subjects.size();

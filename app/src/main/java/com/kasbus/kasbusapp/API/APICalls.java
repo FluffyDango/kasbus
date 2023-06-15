@@ -3,10 +3,7 @@ package com.kasbus.kasbusapp.API;
 import android.util.Log;
 
 import com.kasbus.kasbusapp.Containers.*;
-import com.kasbus.kasbusapp.MainActivity;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,39 +11,47 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class APICalls {
-    private List<Subject> subjects;
     private APIInterface api_interface;
-    private SubjectCallback api_callback;
-
-
-    public interface SubjectCallback {
-        void onSubjectsReceived(List<Subject> subjects);
-    }
+    private SubjectCallback subject_callback;
+    private RatingCallback rating_callback;
+    private CommentCallback comment_callback;
 
     public APICalls() {
         api_interface = APIClient.getClient().create(APIInterface.class);
-        setSubjects(api_interface.getAllSubjectsEN());
     }
+
+    public void setSubjectCallback(SubjectCallback subject_callback) {
+        this.subject_callback = subject_callback;
+    }
+
+
     /**
+     * Starts the asynchronous fetching of data from API.
+     *
      * @param language the language in which the subject names will be given.
      *                 Possible values "EN", "LT"
-    */
-    public APICalls(String language) {
-        api_interface = APIClient.getClient().create(APIInterface.class);
-        useLanguage(language);
+     */
+    public void fetchSubjects(String language) {
+        if (subject_callback == null) {
+            Log.e("API", "fetchSubject ERROR: subject_callback has not been initialized");
+            return;
+        }
+
+        String lang = language.toLowerCase();
+        if (lang.equals("lt"))
+            fetchSubjectsFromAPI(api_interface.getAllSubjectsLT());
+        else if (lang.equals("en"))
+            fetchSubjectsFromAPI(api_interface.getAllSubjectsEN());
+        else
+            Log.e("API", "Invalid language specified: " + language);
     }
 
-    public void setAPICallBack(SubjectCallback api_callback) {
-        this.api_callback = api_callback;
-    }
-
-    private void setSubjects(Call<List<Subject>> call) {
+    private void fetchSubjectsFromAPI(Call<List<Subject>> call) {
         call.enqueue(new Callback<List<Subject>>() {
             @Override
             public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
                 Log.d("CONNECTION", response.code() + "");
-                subjects = response.body();
-                api_callback.onSubjectsReceived(subjects);
+                subject_callback.onSubjectsReceived(response.body());
             }
             @Override
             public void onFailure(Call<List<Subject>> call, Throwable t) {
@@ -55,44 +60,57 @@ public class APICalls {
         });
     }
 
-
     /**
-     * Changes the internal subjects list to use the specified language
+     * Starts the asynchronous fetching of data from API.
      *
-     * @param language the language in which the subject names will be given.
-     *                 Possible values "EN", "LT"
+     * @param id The subject id that is provided in Subject class
      */
-    public void useLanguage(String language) {
-        if (language == "LT")
-            setSubjects(api_interface.getAllSubjectsLT());
-        else if (language == "EN")
-            setSubjects(api_interface.getAllSubjectsEN());
-        else
-            Log.d("API", "useLanguage: invalid language " + language);
-    }
-
-    public List<Subject> getSubjects() {
-        Log.d("test", "subject size - " + Integer.toString(subjects.size()));
-        return subjects;
-    }
-
-    /**
-     *
-     * @param id subject id
-     * @return subject if it was found and null if no such ID exists.
-     */
-    public Subject getSubjectById(String id) {
-        for (Subject subject : subjects) {
-            if (subject.getId() == id)
-                return subject;
+    public void fetchRatings(String id) {
+        if (rating_callback == null) {
+            Log.e("API", "fetchRatings ERROR: rating_callback has not been initialized");
+            return;
         }
-        return null;
+        fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
     }
 
-    public List<Comment> getCommentsById(String id) {
-        return null;
+    private void fetchRatingsFromAPI(Call<Ratings> call) {
+        call.enqueue(new Callback<Ratings>() {
+            @Override
+            public void onResponse(Call<Ratings> call, Response<Ratings> response) {
+                Log.d("CONNECTION", response.code() + "");
+                rating_callback.onRatingsReceived(response.body());
+            }
+            @Override
+            public void onFailure(Call<Ratings> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
-    public Ratings getRatingsById(String id) {
-        return null;
+
+    /**
+     * Starts the asynchronous fetching of data from API.
+     *
+     * @param id The subject id that is provided in Subject class
+     */
+    public void fetchComments(String id) {
+        if (comment_callback == null) {
+            Log.e("API", "fetchComments ERROR: comment_callback has not been initialized");
+            return;
+        }
+        fetchCommentsFromAPI(api_interface.getSubjectComments(id));
+    }
+
+    private void fetchCommentsFromAPI(Call<List<Comment>> call) {
+        call.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                Log.d("CONNECTION", response.code() + "");
+                comment_callback.onCommentsReceived(response.body());
+            }
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
 }
