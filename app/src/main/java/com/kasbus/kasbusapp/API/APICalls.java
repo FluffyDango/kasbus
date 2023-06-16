@@ -11,19 +11,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class APICalls {
-    private APIInterface api_interface;
-    private SubjectCallback subject_callback;
-    private RatingCallback rating_callback;
-    private CommentCallback comment_callback;
+    private static APIInterface api_interface = APIClient.getClient().create(APIInterface.class);;
+    private static SubjectCallback subject_callback;
+    private static RatingCallback rating_callback;
+    private static CommentCallback comment_callback;
 
-    public APICalls() {
-        api_interface = APIClient.getClient().create(APIInterface.class);
+//    public APICalls() {
+//        api_interface = APIClient.getClient().create(APIInterface.class);
+//    }
+
+    public static void setSubjectCallback(SubjectCallback subject_cb) {
+        subject_callback = subject_cb;
     }
-
-    public void setSubjectCallback(SubjectCallback subject_callback) {
-        this.subject_callback = subject_callback;
+    public static Boolean isSubjectCallbackSet() {
+        return subject_callback == null;
     }
-
 
     /**
      * Starts the asynchronous fetching of data from API.
@@ -31,22 +33,22 @@ public class APICalls {
      * @param language the language in which the subject names will be given.
      *                 Possible values "EN", "LT"
      */
-    public void fetchSubjects(String language) {
-        if (subject_callback == null) {
+    public static void fetchSubjects(String language) {
+        if (isSubjectCallbackSet()) {
             Log.e("API", "fetchSubject ERROR: subject_callback has not been initialized");
             return;
         }
 
         String lang = language.toLowerCase();
         if (lang.equals("lt"))
-            fetchSubjectsFromAPI(api_interface.getAllSubjectsLT());
+            fetchSubjectsFromAPI(api_interface.getAllSubjectsLT(), language);
         else if (lang.equals("en"))
-            fetchSubjectsFromAPI(api_interface.getAllSubjectsEN());
+            fetchSubjectsFromAPI(api_interface.getAllSubjectsEN(), language);
         else
             Log.e("API", "Invalid language specified: " + language);
     }
 
-    private void fetchSubjectsFromAPI(Call<List<Subject>> call) {
+    private static void fetchSubjectsFromAPI(Call<List<Subject>> call, String language) {
         call.enqueue(new Callback<List<Subject>>() {
             @Override
             public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
@@ -55,6 +57,7 @@ public class APICalls {
             }
             @Override
             public void onFailure(Call<List<Subject>> call, Throwable t) {
+                subject_callback.onSubjectFailure(language);
                 call.cancel();
             }
         });
@@ -65,7 +68,7 @@ public class APICalls {
      *
      * @param id The subject id that is provided in Subject class
      */
-    public void fetchRatings(String id) {
+    public static void fetchRatings(String id) {
         if (rating_callback == null) {
             Log.e("API", "fetchRatings ERROR: rating_callback has not been initialized");
             return;
@@ -73,7 +76,7 @@ public class APICalls {
         fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
     }
 
-    private void fetchRatingsFromAPI(Call<Ratings> call) {
+    private static void fetchRatingsFromAPI(Call<Ratings> call) {
         call.enqueue(new Callback<Ratings>() {
             @Override
             public void onResponse(Call<Ratings> call, Response<Ratings> response) {
@@ -92,7 +95,7 @@ public class APICalls {
      *
      * @param id The subject id that is provided in Subject class
      */
-    public void fetchComments(String id) {
+    public static void fetchComments(String id) {
         if (comment_callback == null) {
             Log.e("API", "fetchComments ERROR: comment_callback has not been initialized");
             return;
@@ -100,7 +103,7 @@ public class APICalls {
         fetchCommentsFromAPI(api_interface.getSubjectComments(id));
     }
 
-    private void fetchCommentsFromAPI(Call<List<Comment>> call) {
+    private static void fetchCommentsFromAPI(Call<List<Comment>> call) {
         call.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
