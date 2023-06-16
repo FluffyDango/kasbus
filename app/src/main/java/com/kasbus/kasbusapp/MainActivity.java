@@ -49,10 +49,13 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         Button retry_button = (Button) findViewById(R.id.retry_button);
         ConstraintLayout loading_screen = (ConstraintLayout) findViewById(R.id.loading_screen);
 
-        retry_button.setOnClickListener(v -> {
-            APICalls.fetchSubjects(language);
-        });
         retry_loading_screen.setVisibility(View.VISIBLE);
         loading_screen.setVisibility(View.GONE);
+
+        retry_button.setOnClickListener(v -> {
+            loading_screen.setVisibility(View.VISIBLE);
+            retry_loading_screen.setVisibility(View.GONE);
+            APICalls.fetchSubjects(language);
+        });
     }
 }

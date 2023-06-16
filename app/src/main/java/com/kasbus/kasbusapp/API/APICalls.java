@@ -1,5 +1,6 @@
 package com.kasbus.kasbusapp.API;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.kasbus.kasbusapp.Containers.*;
@@ -53,11 +54,14 @@ public class APICalls {
             @Override
             public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
                 Log.d("CONNECTION", response.code() + "");
-                subject_callback.onSubjectsReceived(response.body());
+                Handler handler = new Handler();
+                handler.postDelayed(() -> subject_callback.onSubjectsReceived(response.body()), 300);
             }
             @Override
             public void onFailure(Call<List<Subject>> call, Throwable t) {
-                subject_callback.onSubjectFailure(language);
+                Handler handler = new Handler();
+                handler.postDelayed(() -> subject_callback.onSubjectFailure(language), 300);
+
                 call.cancel();
             }
         });
