@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kasbus.kasbusapp.Containers.Subject;
@@ -42,6 +43,7 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         }
     }
 
+    @NonNull
     @Override
     public SubjectRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -51,8 +53,7 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         View subjectView = inflater.inflate(R.layout.bus_subject, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(subjectView);
-        return viewHolder;
+        return new ViewHolder(subjectView);
     }
 
     // Involves populating data into the item through holder
@@ -64,13 +65,10 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         holder.facultyTextView.setText(subject.getFaculty());
         holder.lecturersTextView.setText(subject.getLecturers());
 
-        holder.containerLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, SubjectActivity.class);
-                context.startActivity(intent);
-            }
+        holder.containerLayout.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, SubjectActivity.class);
+            context.startActivity(intent);
         });
     }
 

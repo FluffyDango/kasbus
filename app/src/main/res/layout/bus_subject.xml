@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:padding="0dp"
+        android:paddingLeft="0dp"
         android:paddingRight="0dp" />
 
     <TextView
@@ -33,6 +33,9 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:paddingRight="0dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp" />
 
 </LinearLayout>

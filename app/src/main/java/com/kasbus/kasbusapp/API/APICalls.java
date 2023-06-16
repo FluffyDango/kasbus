@@ -3,6 +3,8 @@ package com.kasbus.kasbusapp.API;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.kasbus.kasbusapp.Containers.*;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class APICalls {
-    private static APIInterface api_interface = APIClient.getClient().create(APIInterface.class);;
+    private final static APIInterface api_interface = APIClient.getClient().create(APIInterface.class);
     private static SubjectCallback subject_callback;
     private static RatingCallback rating_callback;
     private static CommentCallback comment_callback;
@@ -52,13 +54,13 @@ public class APICalls {
     private static void fetchSubjectsFromAPI(Call<List<Subject>> call, String language) {
         call.enqueue(new Callback<List<Subject>>() {
             @Override
-            public void onResponse(Call<List<Subject>> call, Response<List<Subject>> response) {
+            public void onResponse(@NonNull Call<List<Subject>> call, @NonNull Response<List<Subject>> response) {
                 Log.d("CONNECTION", response.code() + "");
                 Handler handler = new Handler();
                 handler.postDelayed(() -> subject_callback.onSubjectsReceived(response.body()), 300);
             }
             @Override
-            public void onFailure(Call<List<Subject>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Subject>> call, @NonNull Throwable t) {
                 Handler handler = new Handler();
                 handler.postDelayed(() -> subject_callback.onSubjectFailure(language), 300);
 
@@ -80,15 +82,15 @@ public class APICalls {
         fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
     }
 
-    private static void fetchRatingsFromAPI(Call<Ratings> call) {
+    private static void fetchRatingsFromAPI(@NonNull Call<Ratings> call) {
         call.enqueue(new Callback<Ratings>() {
             @Override
-            public void onResponse(Call<Ratings> call, Response<Ratings> response) {
+            public void onResponse(@NonNull Call<Ratings> call, @NonNull Response<Ratings> response) {
                 Log.d("CONNECTION", response.code() + "");
                 rating_callback.onRatingsReceived(response.body());
             }
             @Override
-            public void onFailure(Call<Ratings> call, Throwable t) {
+            public void onFailure(@NonNull Call<Ratings> call, @NonNull Throwable t) {
                 call.cancel();
             }
         });
@@ -107,15 +109,15 @@ public class APICalls {
         fetchCommentsFromAPI(api_interface.getSubjectComments(id));
     }
 
-    private static void fetchCommentsFromAPI(Call<List<Comment>> call) {
+    private static void fetchCommentsFromAPI(@NonNull Call<List<Comment>> call) {
         call.enqueue(new Callback<List<Comment>>() {
             @Override
-            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+            public void onResponse(@NonNull Call<List<Comment>> call, @NonNull Response<List<Comment>> response) {
                 Log.d("CONNECTION", response.code() + "");
                 comment_callback.onCommentsReceived(response.body());
             }
             @Override
-            public void onFailure(Call<List<Comment>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Comment>> call, @NonNull Throwable t) {
                 call.cancel();
             }
         });

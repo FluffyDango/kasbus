@@ -32,8 +32,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_background"
-                android:contentDescription="Enter How Much Cookies You Want"
-                android:hint="e.g 5"
+                android:contentDescription="@string/icon_content_descr"
                 android:scaleType="fitCenter"
                 app:layout_constraintCircleRadius="5dp"
                 app:srcCompat="@drawable/kasbus_logo_with_border" />
@@ -50,8 +49,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:backgroundTint="#ffffff"
-                android:text="LT/EN"
+                app:backgroundTint="#ffffff"
+                android:text="@string/language"
                 android:textColor="#000000" />
 
         </LinearLayout>
@@ -74,7 +73,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Filter out subjects"
+                android:contentDescription="@string/filter"
                 android:padding="16dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/filter_dark" />
@@ -86,9 +85,10 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/rounded_background"
-                android:hint="Search by name..."
+                android:hint="@string/search_bar_hint"
                 android:inputType="text"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:autofillHints="">
 
             </EditText>
 
@@ -115,7 +115,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/retry_loading_screen"

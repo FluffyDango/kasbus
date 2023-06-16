@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:gravity="center"
-        android:text="Loading failed"
+        android:text="@string/loading_failed"
         android:textColor="#EFEFEF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="163dp"
         android:layout_marginRight="163dp"
-        android:text="Retry"
+        android:text="@string/retry_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />

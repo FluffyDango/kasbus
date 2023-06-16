@@ -9,14 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
 import com.kasbus.kasbusapp.API.*;
 import com.kasbus.kasbusapp.Containers.*;
 
 import java.util.List;
-
-import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity implements SubjectCallback {
     @Override
