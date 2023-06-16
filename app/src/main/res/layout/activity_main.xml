@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -49,9 +50,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                app:backgroundTint="#ffffff"
                 android:text="@string/language"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                app:backgroundTint="#ffffff" />
 
         </LinearLayout>
 
@@ -68,6 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top">
 
+
             <ImageButton
                 android:id="@+id/filter"
                 android:layout_width="64dp"
@@ -78,19 +80,10 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/filter_dark" />
 
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/rounded_background"
-                android:hint="@string/search_bar_hint"
-                android:inputType="text"
-                android:padding="12dp"
-                android:autofillHints="">
-
-            </EditText>
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="343dp"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
@@ -105,7 +98,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_and_filter" >
+            app:layout_constraintTop_toBottomOf="@+id/search_and_filter">
 
         </androidx.recyclerview.widget.RecyclerView>
 
