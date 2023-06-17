@@ -1,19 +1,21 @@
 package com.kasbus.kasbusapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.kasbus.kasbusapp.API.*;
 import com.kasbus.kasbusapp.Containers.*;
@@ -22,19 +24,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SubjectCallback {
+
+    public static String PACKAGE_NAME;
+    @SuppressLint("ApplySharedPref")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PACKAGE_NAME = getApplicationContext().getPackageName();
+        SharedPreferences prefs = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+        if (!prefs.contains("language")) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("language", "EN");
+            editor.commit();
+        }
+
+
+
+        ImageButton filter = (ImageButton) findViewById(R.id.filter);
+        filter.setOnClickListener(view -> {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, SelectionActivity.class);
+            context.startActivity(intent);
+        });
+
+        Button lang_button = (Button) findViewById(R.id.lang_button);
+
         APICalls.setSubjectCallback(this);
-        APICalls.fetchSubjects("EN");
+        String lang = prefs.getString("language", "FAILED");
+        Log.d("test", lang);
+        APICalls.fetchSubjects(lang);
+        setButtonText(lang);
+
+        lang_button.setOnClickListener(view -> {
+            String current_language = prefs.getString("language", "FAILED");
+            String other_language = "";
+            if (current_language.equals("LT")) {
+                other_language = "EN";
+            }
+            else if (current_language.equals("EN")) {
+                other_language = "LT";
+            }
+
+            SharedPreferences.Editor editor = prefs.edit();
+            APICalls.fetchSubjects(other_language);
+            editor.putString("language", other_language);
+            editor.apply();
+            setButtonText(other_language);
+        });
     }
 
     @Override
     public void onSubjectsReceived(List<Subject> subjects) {
         RecyclerView rv_subjects = (RecyclerView) findViewById(R.id.bus_list);
-        SearchView searchView = findViewById(R.id.searchView);
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
         ConstraintLayout loading_screen = (ConstraintLayout) findViewById(R.id.loading_screen);
         ConstraintLayout retry_loading_screen = (ConstraintLayout) findViewById(R.id.retry_loading_screen);
 
@@ -49,13 +93,17 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
-                searchSubjects(text, subjects);
+                List<Subject> filteredSubjects = searchSubjects(text, subjects);
+                if (filteredSubjects == null) {
+                    Log.e("filter", "searchSubjects returned null, subjects is likely null");
+                    return false;
+                }
+                adapter.setSubjects(filteredSubjects);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String text) {
-                searchSubjects(text, subjects);
                 return true;
             }
         });
@@ -77,26 +125,34 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         });
     }
 
-    private void searchSubjects(String query, List<Subject> subjects) {
-        if (subjects == null) {
-            return;
-        }
-        List<Subject> filteredSubjects = new ArrayList<>();
+    /**
+     *
+     * @param query the thing we want to search for
+     * @param subjects the list of subjects to filter out
+     * @return null or filtered subjects
+     *
+     */
+    private List<Subject> searchSubjects(String query, List<Subject> subjects) {
+        if (subjects == null)
+            return null;
 
+        List<Subject> filteredSubjects = new ArrayList<>();
         for (Subject subject : subjects) {
             if (subject.getName().toLowerCase().contains(query.toLowerCase())) {
                 filteredSubjects.add(subject);
             }
         }
-
-        RecyclerView rv_subjects = (RecyclerView) findViewById(R.id.bus_list);
-        SubjectRecycleViewAdapter adapter = (SubjectRecycleViewAdapter) rv_subjects.getAdapter();
-        adapter.setSubjects(filteredSubjects);
+        return filteredSubjects;
     }
 
-    public void sendToFilterPage(View v) {
-        Context context = v.getContext();
-        Intent intent = new Intent(context, SelectionActivity.class);
-        context.startActivity(intent);
+    private void setButtonText(String language) {
+        Button lang_button = (Button) findViewById(R.id.lang_button);
+        if (language.equals("EN"))
+            lang_button.setText(Html.fromHtml("<big><b>EN</b></big>/<small>LT</small>"));
+        else if (language.equals("LT"))
+            lang_button.setText(Html.fromHtml("<small>EN</small>/<big><b>LT</b></big>"));
+        else
+            Log.e("main_activity", "Failed to set lang_button text");
     }
+
 }

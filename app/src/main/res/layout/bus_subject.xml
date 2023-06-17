@@ -15,9 +15,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:paddingLeft="0dp"
@@ -39,13 +37,10 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:paddingStart="5dp"
-        android:paddingLeft="5dp"
         android:paddingEnd="0dp"
-        android:paddingRight="0dp"
         app:autoSizeTextType="uniform" />
 
 </LinearLayout>

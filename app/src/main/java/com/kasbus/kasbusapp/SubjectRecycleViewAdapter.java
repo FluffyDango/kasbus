@@ -51,14 +51,11 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        // Inflate the custom layout
         View subjectView = inflater.inflate(R.layout.bus_subject, parent, false);
 
-        // Return a new holder instance
         return new ViewHolder(subjectView);
     }
 
-    // Involves populating data into the item through holder
     @Override
     public void onBindViewHolder(SubjectRecycleViewAdapter.ViewHolder holder, int position) {
         Subject subject = subjects.get(position);
