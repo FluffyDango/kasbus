@@ -19,7 +19,7 @@
             android:id="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#5C4D4D"
+            android:background="#7e2132"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
                 android:contentDescription="@string/icon_content_descr"
                 android:scaleType="fitCenter"
                 app:layout_constraintCircleRadius="5dp"
-                app:srcCompat="@drawable/kasbus_logo_with_border" />
+                app:srcCompat="@drawable/kasbus_logo_rounded" />
 
             <View
                 android:layout_width="0dp"
@@ -76,14 +76,21 @@
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/filter"
+                android:onClick="sendToFilterPage"
                 android:padding="16dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/filter_dark" />
+                app:srcCompat="@drawable/filter_white" />
 
             <SearchView
                 android:id="@+id/searchView"
-                android:layout_width="343dp"
-                android:layout_height="match_parent" />
+                style="@style/SearchViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:iconifiedByDefault="false" />
 
         </LinearLayout>
 
@@ -109,7 +116,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone" />
+            tools:visibility="invisible" />
 
         <include
             android:id="@+id/retry_loading_screen"

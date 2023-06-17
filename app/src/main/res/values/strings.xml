@@ -9,4 +9,19 @@
     <string name="loading">Loading...</string>
     <string name="loading_failed">Loading failed</string>
     <string name="retry_button">Retry</string>
+
+    <string name="amount_of_credits">Amount of credits:</string>
+    <string name="subject_language">Language:</string>
+    <string name="amount_of_hours_text">Amount of hours:</string>
+    <string name="go_to_site">Go to an official site</string>
+    <string name="interest_text">Interest</string>
+    <string name="your_evaluation">Your evaluation:</string>
+    <string name="amount_of_work_text">Amount of work</string>
+    <string name="actuality">Actuality</string>
+    <string name="teaching">Teaching</string>
+
+    <string name="leave_comment">Leave your comment here...</string>
+    <string name="faculty_text">Faculty</string>
+    <string name="send_button_text">Send</string>
+    <string name="reminder_text">Remember, all of us expect to find valuable and constructive feedback, not just some random spamą</string>
 </resources>

@@ -24,11 +24,6 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
     public SubjectRecycleViewAdapter(List<Subject> subjects) {
         this.subjects = subjects;
     }
-    public void setData(List<Subject> subjects) {
-        this.subjects = subjects;
-        notifyDataSetChanged();
-    }
-
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,7 +41,10 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
             lecturersTextView = (TextView) itemView.findViewById(R.id.lecturers);
         }
     }
-
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public SubjectRecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

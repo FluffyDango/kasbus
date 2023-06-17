@@ -26,7 +26,7 @@
                 android:fontFamily="sans-serif"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
-                android:text="Aesthetics"
+                android:text="Subject"
                 android:textStyle="bold"/>
 
             <TextView
@@ -37,8 +37,9 @@
                 android:fontFamily="sans-serif"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
-                android:text="(FILF)"
-                android:textStyle="bold"/>
+                android:text="(Faculty)"
+                android:textStyle="bold"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <TextView
@@ -87,7 +88,8 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:text="Amount of credits:  "/>
+                        android:layout_marginRight="5dp"
+                        android:text="@string/amount_of_credits"/>
 
                     <TextView
                         android:id="@+id/credits_amount"
@@ -114,7 +116,8 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:text="Language:  "/>
+                        android:layout_marginRight="5dp"
+                        android:text="@string/subject_language"/>
                     <TextView
                         android:id="@+id/language_type"
                         android:layout_width="wrap_content"
@@ -140,7 +143,8 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:text="Amount of hours:  "/>
+                        android:layout_marginRight="5dp"
+                        android:text="@string/amount_of_hours_text"/>
                     <TextView
                         android:id="@+id/hours_amount"
                         android:layout_width="wrap_content"
@@ -167,7 +171,7 @@
                     android:background="@drawable/rounded_background"
                     app:backgroundTint="#FFFFFF"
                     android:fontFamily="sans-serif"
-                    android:text="Go to an official site"
+                    android:text="@string/go_to_site"
                     android:textColor="#000000"
                     android:textSize="14sp"
                 />
@@ -184,110 +188,115 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/information">
 
-            <LinearLayout
+            <TableLayout
                 android:id="@+id/ratings1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="0,1">
 
-                <LinearLayout
-                    android:id="@+id/interest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/rounded_background"
-                    android:elevation="10dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="14dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <TextView
-                        android:id="@+id/interestText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Interest"
-                        android:textColor="#374151"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ratingOfInterest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:paddingVertical="10dp"
-                        android:text="4"
-                        android:textColor="#374151"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/interestText" />
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    >
 
                     <LinearLayout
-                        android:id="@+id/evaluation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
-                        <TextView
-                            android:id="@+id/evaluationText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:text="Your evaluation: "
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                        <TextView
-                            android:id="@+id/evaluationRating"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:text="5"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <RatingBar
-                        android:id="@+id/interestRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="-120dp"
-                        android:layout_marginBottom="-30dp"
-                        android:numStars="5"
-                        android:saveEnabled="true"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:transformPivotX="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_weight="1">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:id="@+id/interest"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_weight="1"
                         android:background="@drawable/rounded_background"
                         android:elevation="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <TextView
+                            android:id="@+id/interestText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/interest_text"
+                            android:textColor="#374151"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <TextView
+                            android:id="@+id/ratingOfInterest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:paddingVertical="10dp"
+                            android:text="4"
+                            android:textColor="#374151"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/interestText" />
+
+                        <LinearLayout
+                            android:id="@+id/evaluation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+
+                            <TextView
+                                android:id="@+id/evaluationText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:layout_marginRight="5dp"
+                                android:text="@string/your_evaluation"
+                                android:textColor="#000000"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/evaluationRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:text="5"
+                                android:textColor="#000000"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <RatingBar
+                            android:id="@+id/interestRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:saveEnabled="true"
+                            style="?android:attr/ratingBarStyleSmall"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="14dp"
                         android:layout_marginRight="20dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/rounded_background"
+                        android:elevation="10dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
@@ -297,27 +306,27 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
+                            android:text="@string/amount_of_work_text"
                             android:textColor="#374151"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:text="Amount of work"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
+                            app:layout_constraintStart_toStartOf="parent" />
+
                         <TextView
                             android:id="@+id/ratingOfWork"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
+                            android:paddingVertical="10dp"
+                            android:text="2"
                             android:textColor="#374151"
                             android:textSize="24sp"
                             android:textStyle="bold"
-                            android:text="2"
-                            android:paddingVertical="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/interest"
-                            />
+                            app:layout_constraintTop_toBottomOf="@id/interest" />
+
                         <LinearLayout
                             android:id="@+id/evaluation2"
                             android:layout_width="wrap_content"
@@ -325,193 +334,104 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+
                             <TextView
                                 android:id="@+id/evaluationText2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
-                                android:text="Your evaluation: "
+                                android:layout_marginRight="5dp"
+                                android:text="@string/your_evaluation"
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
+
                             <TextView
                                 android:id="@+id/evaluationRating2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:text="5"
-                                android:textStyle="bold"
                                 android:textColor="#000000"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <RatingBar
                             android:id="@+id/workRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:saveEnabled="true"
                             android:numStars="5"
-                            android:scaleX="0.5"
-                            android:scaleY="0.5"
-                            android:transformPivotX="0dp"
-                            android:layout_marginRight="-120dp"
-                            android:layout_marginBottom="-30dp"
-                            />
+                            android:saveEnabled="true"
+                            style="?android:attr/ratingBarStyleSmall" />
                     </LinearLayout>
-                </LinearLayout>
+                </TableRow>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/rating2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <LinearLayout
-                    android:id="@+id/actuality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/rounded_background"
-                    android:elevation="10dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="14dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <TextView
-                        android:id="@+id/actualityText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="Actuality"
-                        android:textColor="#374151"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ratingOfActuality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:paddingVertical="10dp"
-                        android:text="3"
-                        android:textColor="#374151"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/interestText" />
-
+                <TableRow
+                    android:id="@+id/rating2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
                     <LinearLayout
-                        android:id="@+id/evaluation3"
+                        android:id="@+id/actuality"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
-                        <TextView
-                            android:id="@+id/evaluationText3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:text="Your evaluation: "
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                        <TextView
-                            android:id="@+id/evaluationRating3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:text="5"
-                            android:textStyle="bold"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <RatingBar
-                        android:id="@+id/actualityRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="-120dp"
-                        android:layout_marginBottom="-30dp"
-                        android:numStars="5"
-                        android:saveEnabled="true"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:transformPivotX="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:layout_weight="1">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@drawable/rounded_background"
                         android:elevation="10dp"
                         android:padding="10dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="14dp"
-                        android:layout_marginRight="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
                         <TextView
-                            android:id="@+id/teachingText"
+                            android:id="@+id/actualityText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
+                            android:text="@string/actuality"
                             android:textColor="#374151"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:text="Teaching            "
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
+                            app:layout_constraintStart_toStartOf="parent" />
+
                         <TextView
-                            android:id="@+id/ratingOfTeaching"
+                            android:id="@+id/ratingOfActuality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
+                            android:paddingVertical="10dp"
+                            android:text="3"
                             android:textColor="#374151"
                             android:textSize="24sp"
                             android:textStyle="bold"
-                            android:text="2"
-                            android:paddingVertical="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/interest"
-                            />
+                            app:layout_constraintTop_toBottomOf="@id/interestText" />
+
                         <LinearLayout
-                            android:id="@+id/evaluation4"
+                            android:id="@+id/evaluation3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
                             <TextView
-                                android:id="@+id/evaluationText4"
+                                android:id="@+id/evaluationText3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
-                                android:text="Your evaluation: "
+                                android:layout_marginRight="5dp"
+                                android:text="@string/your_evaluation"
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
                             <TextView
-                                android:id="@+id/evaluationRating4"
+                                android:id="@+id/evaluationRating3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
@@ -520,22 +440,101 @@
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
                         </LinearLayout>
+
                         <RatingBar
-                            android:id="@+id/teachingRating"
+                            android:id="@+id/actualityRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:saveEnabled="true"
                             android:numStars="5"
-                            android:scaleX="0.5"
-                            android:scaleY="0.5"
-                            android:transformPivotX="0dp"
-                            android:layout_marginRight="-120dp"
-                            android:layout_marginBottom="-30dp"
-                            />
+                            android:saveEnabled="true"
+                            style="?android:attr/ratingBarStyleSmall"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
                     </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/rounded_background"
+                            android:elevation="10dp"
+                            android:padding="10dp"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <TextView
+                                android:id="@+id/teachingText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:textColor="#374151"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:text="@string/teaching"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                />
+                            <TextView
+                                android:id="@+id/ratingOfTeaching"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:textColor="#374151"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:text="2"
+                                android:paddingVertical="10dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/interest"
+                                />
+                            <LinearLayout
+                                android:id="@+id/evaluation4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+
+                                <TextView
+                                    android:id="@+id/evaluationText4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="sans-serif"
+                                    android:text="@string/your_evaluation"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/evaluationRating4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:text="5"
+                                    android:textStyle="bold"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                            <RatingBar
+                                android:id="@+id/teachingRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:saveEnabled="true"
+                                android:numStars="5"
+                                style="?android:attr/ratingBarStyleSmall"
+                                />
+                        </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -545,11 +544,12 @@
                 android:id="@+id/plain_text_input"
                 android:layout_height="48dp"
                 android:layout_width="match_parent"
+                android:importantForAutofill="no"
                 android:layout_margin="15dp"
                 android:padding="10dp"
                 android:inputType="text"
                 android:fontFamily="sans-serif"
-                android:hint="Leave your comment here..."
+                android:hint="@string/leave_comment"
                 android:background="@drawable/edit_text_background"/>
 
             <LinearLayout
@@ -569,7 +569,7 @@
                         android:background="@drawable/edit_text_background"
                         app:backgroundTint="#949494"
                         android:fontFamily="sans-serif"
-                        android:text="Faculty"
+                        android:text="@string/faculty_text"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         />
@@ -589,7 +589,7 @@
                         android:background="@drawable/rounded_background"
                         app:backgroundTint="#9F1239"
                         android:fontFamily="sans-serif"
-                        android:text="Send"
+                        android:text="@string/send_button_text"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"
                         />
@@ -603,7 +603,8 @@
                 android:fontFamily="sans-serif"
                 android:layout_marginHorizontal="10dp"
                 android:textAlignment="center"
-                android:text="Remember, all of us expect to find valuable and constructive feedback, not just some random spamą"
+                android:gravity="center"
+                android:text="@string/reminder_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sendButton"
@@ -625,7 +626,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:fontFamily="sans-serif"
                     android:text="Dalykas skambėjo idomiai, tačiau dėstymas labai paviršutiniškas, prabėgant šį bei tą, atsainiai, nelendant į gilumą. Nuvylė. Norintiems lengvo, labai daug laiko neužimančio dalyko-BUS (pun intended) lengva "
                     />

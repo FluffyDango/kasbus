@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">#FF000000</item>
+
+        <item name="android:textColorHint">#FF000000</item>
+
+        <item name="android:background">@drawable/rounded_background</item>
+    </style>
 </resources>

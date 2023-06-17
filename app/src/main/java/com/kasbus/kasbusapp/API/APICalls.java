@@ -19,10 +19,6 @@ public class APICalls {
     private static RatingCallback rating_callback;
     private static CommentCallback comment_callback;
 
-//    public APICalls() {
-//        api_interface = APIClient.getClient().create(APIInterface.class);
-//    }
-
     public static void setSubjectCallback(SubjectCallback subject_cb) {
         subject_callback = subject_cb;
     }
