@@ -16,15 +16,21 @@ import retrofit2.Response;
 public class APICalls {
     private final static APIInterface api_interface = APIClient.getClient().create(APIInterface.class);
     private static SubjectCallback subject_callback;
-    private static RatingCallback rating_callback;
-    private static CommentCallback comment_callback;
+    private static PostRatingCallback post_rating_callback;
+    private static CommentCallback post_comment_callback;
 
 
     public static void setSubjectCallback(SubjectCallback subject_cb) {
         subject_callback = subject_cb;
     }
+    public static void setPostRatingCallback(PostRatingCallback post_rating_cb) {
+        post_rating_callback = post_rating_cb;
+    }
     public static Boolean isSubjectCallbackSet() {
-        return subject_callback == null;
+        return subject_callback != null;
+    }
+    public static Boolean isPostRatingCallbackSet() {
+        return post_rating_callback != null;
     }
 
     /**
@@ -34,7 +40,7 @@ public class APICalls {
      *                 Possible values "EN", "LT"
      */
     public static void fetchSubjects(String language) {
-        if (isSubjectCallbackSet()) {
+        if (!isSubjectCallbackSet()) {
             Log.e("API", "fetchSubject ERROR: subject_callback has not been initialized");
             return;
         }
@@ -71,24 +77,47 @@ public class APICalls {
      *
      * @param id The subject id that is provided in Subject class
      */
-    public static void fetchRatings(String id) {
-        if (rating_callback == null) {
-            Log.e("API", "fetchRatings ERROR: rating_callback has not been initialized");
-            return;
-        }
-        fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
-    }
+//    public static void fetchRatings(String id) {
+//        if (rating_callback == null) {
+//            Log.e("API", "fetchRatings ERROR: rating_callback has not been initialized");
+//            return;
+//        }
+//        fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
+//    }
+//
+//    private static void fetchRatingsFromAPI(@NonNull Call<Ratings> call) {
+//        call.enqueue(new Callback<Ratings>() {
+//            @Override
+//            public void onResponse(@NonNull Call<Ratings> call, @NonNull Response<Ratings> response) {
+//                Log.d("CONNECTION", response.code() + "");
+//                rating_callback.onRatingsReceived(response.body());
+//            }
+//            @Override
+//            public void onFailure(@NonNull Call<Ratings> call, @NonNull Throwable t) {
+//                call.cancel();
+//            }
+//        });
+//    }
 
-    private static void fetchRatingsFromAPI(@NonNull Call<Ratings> call) {
-        call.enqueue(new Callback<Ratings>() {
+    public static void postRating(String subjectId, String category, int rating) {
+        if (isPostRatingCallbackSet())
+            PostRatingToAPI(api_interface.postRating(subjectId, category, rating));
+        else
+            Log.e("API", "post_rating_callback is null");
+    }
+    private static void PostRatingToAPI(@NonNull Call<PostRatingResponse> call) {
+        call.enqueue(new Callback<PostRatingResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Ratings> call, @NonNull Response<Ratings> response) {
-                Log.d("CONNECTION", response.code() + "");
-                rating_callback.onRatingsReceived(response.body());
+            public void onResponse(@NonNull Call<PostRatingResponse> call, 
+                                   @NonNull Response<PostRatingResponse> response) {
+                post_rating_callback.onRatingPostComplete(response.body());
             }
+
             @Override
-            public void onFailure(@NonNull Call<Ratings> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<PostRatingResponse> call, Throwable t) {
+                Log.d("API", "PostRatingToAPI failed");
                 call.cancel();
+//                Toast.makeText(MainActivity.this,"Error Occurred",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -98,27 +127,27 @@ public class APICalls {
      *
      * @param id The subject id that is provided in Subject class
      */
-    public static void fetchComments(String id) {
-        if (comment_callback == null) {
-            Log.e("API", "fetchComments ERROR: comment_callback has not been initialized");
-            return;
-        }
-        fetchCommentsFromAPI(api_interface.getSubjectComments(id));
-    }
+//    public static void fetchComments(String id) {
+//        if (comment_callback == null) {
+//            Log.e("API", "fetchComments ERROR: comment_callback has not been initialized");
+//            return;
+//        }
+//        fetchCommentsFromAPI(api_interface.getSubjectComments(id));
+//    }
 
-    private static void fetchCommentsFromAPI(@NonNull Call<List<Comment>> call) {
-        call.enqueue(new Callback<List<Comment>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Comment>> call, @NonNull Response<List<Comment>> response) {
-                Log.d("CONNECTION", response.code() + "");
-                comment_callback.onCommentsReceived(response.body());
-            }
-            @Override
-            public void onFailure(@NonNull Call<List<Comment>> call, @NonNull Throwable t) {
-                call.cancel();
-            }
-        });
-    }
+//    private static void fetchCommentsFromAPI(@NonNull Call<List<Comment>> call) {
+//        call.enqueue(new Callback<List<Comment>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<Comment>> call, @NonNull Response<List<Comment>> response) {
+//                Log.d("CONNECTION", response.code() + "");
+//                comment_callback.onCommentsReceived(response.body());
+//            }
+//            @Override
+//            public void onFailure(@NonNull Call<List<Comment>> call, @NonNull Throwable t) {
+//                call.cancel();
+//            }
+//        });
+//    }
 
 
 }

@@ -24,4 +24,23 @@
     <string name="faculty_text">Faculty</string>
     <string name="send_button_text">Send</string>
     <string name="reminder_text">Remember, all of us expect to find valuable and constructive feedback, not just some random spamą</string>
+    
+    <string-array name="faculties">
+        <item>CHGF</item>
+        <item>EVAF</item>
+        <item>FLF</item>
+        <item>FILF</item>
+        <item>FF</item>
+        <item>GMC</item>
+        <item>IF</item>
+        <item>KNF</item>
+        <item>KOMF</item>
+        <item>MF</item>
+        <item>ŠA</item>
+        <item>TSPMI</item>
+        <item>TF</item>
+        <item>VM</item>
+        <item>MIF</item>
+        <item>-</item>
+    </string-array>
 </resources>

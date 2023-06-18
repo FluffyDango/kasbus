@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <string name="app_name">Kasbus</string>-->
+
+<!--    <string name="icon_content_descr">Kasbus paspaudžiamas piktograma</string>-->
+<!--    <string name="language">EN/LT</string>-->
+<!--    <string name="filter">Filtruoti dalykus</string>-->
+<!--    <string name="search_bar_hint">Ieškoti dalykų</string>-->
+
+<!--    <string name="loading">Kraunama...</string>-->
+<!--    <string name="loading_failed">Kraunant įvyko klaida</string>-->
+<!--    <string name="retry_button">Pakartoti</string>-->
+
+<!--    <string name="amount_of_credits">Kreditų skaičius:</string>-->
+<!--    <string name="subject_language">Kalba:</string>-->
+<!--    <string name="amount_of_hours_text">Valandų skaičius:</string>-->
+<!--    <string name="go_to_site">Eiti į oficialią svetainę</string>-->
+<!--    <string name="interest_text">Dominavimas</string>-->
+<!--    <string name="your_evaluation">Jūsų įvertinimas:</string>-->
+<!--    <string name="amount_of_work_text">Darbo apimtis</string>-->
+<!--    <string name="actuality">Aktualumas</string>-->
+<!--    <string name="teaching">Mokymas</string>-->
+
+<!--    <string name="leave_comment">Palikite savo komentarą čia...</string>-->
+<!--    <string name="faculty_text">Fakultetas</string>-->
+<!--    <string name="send_button_text">Siųsti</string>-->
+<!--    <string name="reminder_text">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spam'ą</string>-->
+</resources>

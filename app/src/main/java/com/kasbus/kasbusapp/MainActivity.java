@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
             editor.commit();
         }
 
-
-
         ImageButton filter = (ImageButton) findViewById(R.id.filter);
         filter.setOnClickListener(view -> {
             Context context = view.getContext();
@@ -53,25 +51,23 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
         APICalls.setSubjectCallback(this);
         String lang = prefs.getString("language", "FAILED");
-        Log.d("test", lang);
         APICalls.fetchSubjects(lang);
         setButtonText(lang);
 
         lang_button.setOnClickListener(view -> {
             String current_language = prefs.getString("language", "FAILED");
-            String other_language = "";
-            if (current_language.equals("LT")) {
-                other_language = "EN";
-            }
-            else if (current_language.equals("EN")) {
-                other_language = "LT";
+            String next_language = getNextLanguage(current_language);
+            if (next_language == null) {
+                Log.e("main",
+                        "Unknown language in language preferences: " + current_language);
+                return;
             }
 
             SharedPreferences.Editor editor = prefs.edit();
-            APICalls.fetchSubjects(other_language);
-            editor.putString("language", other_language);
+            APICalls.fetchSubjects(next_language);
+            editor.putString("language", next_language);
             editor.apply();
-            setButtonText(other_language);
+            setButtonText(next_language);
         });
     }
 
@@ -95,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
             public boolean onQueryTextSubmit(String text) {
                 List<Subject> filteredSubjects = searchSubjects(text, subjects);
                 if (filteredSubjects == null) {
-                    Log.e("filter", "searchSubjects returned null, subjects is likely null");
+                    Log.e("filter",
+                            "searchSubjects returned null, subjects array is likely null");
                     return false;
                 }
                 adapter.setSubjects(filteredSubjects);
@@ -143,6 +140,18 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
             }
         }
         return filteredSubjects;
+    }
+
+    private String getNextLanguage(String current_language) {
+        String next_language;
+        if (current_language.equals("LT"))
+            next_language = "EN";
+        else if (current_language.equals("EN"))
+            next_language = "LT";
+        else
+            return null;
+
+        return next_language;
     }
 
     private void setButtonText(String language) {

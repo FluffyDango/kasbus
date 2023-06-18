@@ -19,7 +19,7 @@
             android:id="@+id/top"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#7e2132"
+            android:background="#d9dbdd"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
 
             <ImageButton
                 android:id="@+id/icon"
-                android:layout_width="50dp"
+                android:layout_width="140dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -36,12 +36,23 @@
                 android:contentDescription="@string/icon_content_descr"
                 android:scaleType="fitCenter"
                 app:layout_constraintCircleRadius="5dp"
-                app:srcCompat="@drawable/kasbus_logo_rounded" />
+                app:srcCompat="@drawable/kasbus_logo_words_transparent" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/filter"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/filter"
+                android:onClick="sendToFilterPage"
+                android:padding="16dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/filter_red" />
 
             <Button
                 android:id="@+id/lang_button"
@@ -50,7 +61,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/language"
-                android:textColor="#000000"
+                android:textColor="#29292e"
                 android:textSize="16sp"
                 app:backgroundTint="#ffffff" />
 
@@ -70,25 +81,15 @@
             app:layout_constraintTop_toBottomOf="@+id/top">
 
 
-            <ImageButton
-                android:id="@+id/filter"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/filter"
-                android:onClick="sendToFilterPage"
-                android:padding="16dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/filter_white" />
-
             <SearchView
                 android:id="@+id/searchView"
                 style="@style/SearchViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:iconifiedByDefault="false" />
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/search_bar_hint" />
 
         </LinearLayout>
 
