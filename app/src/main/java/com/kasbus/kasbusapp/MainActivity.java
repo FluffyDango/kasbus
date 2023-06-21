@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         ImageButton filter = (ImageButton) findViewById(R.id.filter);
         filter.setOnClickListener(view -> {
             Context context = view.getContext();
-            Intent intent = new Intent(context, SelectionActivity.class);
+            Intent intent = new Intent(context, FilterActivity.class);
             context.startActivity(intent);
         });
 

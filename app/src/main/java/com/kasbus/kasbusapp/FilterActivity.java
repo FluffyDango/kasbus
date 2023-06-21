@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SelectionActivity extends Activity {
+public class FilterActivity extends Activity {
 
     SharedPreferences sharedPreferences;
 

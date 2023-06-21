@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Kasbus</string>
+
+    <string name="icon_content_descr" translatable="false">Kasbus paspaudžiamas piktograma</string>
+    <string name="language" translatable="false">EN/LT</string>
+    <string name="filter_" translatable="false" >Filtruoti dalykus</string>
+    <string name="search_bar_hint" translatable="false">Ieškoti dalykų</string>
+    <string name="loading" translatable="false">Kraunama</string>
+    <string name="loading_failed" translatable="false">Kraunant įvyko klaida</string>
+    <string name="retry_button" translatable="false">Pakartoti</string>
+
+    <string name="amount_of_credits" translatable="false">Kreditų skaičius:</string>
+    <string name="subject_language" translatable="false">Kalba:</string>
+    <string name="amount_of_hours_text" translatable="false">Valandų skaičius:</string>
+    <string name="go_to_site" translatable="false">Eiti į oficialią svetainę</string>
+    <string name="interest_text" translatable="false">Dominavimas</string>
+    <string name="your_evaluation" translatable="false">Jūsų įvertinimas:</string>
+    <string name="amount_of_work_text" translatable="false">Darbo apimtis</string>
+    <string name="actuality" translatable="false">Aktualumas</string>
+    <string name="teaching" translatable="false">Mokymas</string>
+
+    <string name="leave_comment" translatable="false">Palikite savo komentarą čia</string>
+    <string name="faculty_text" translatable="false">Fakultetas</string>
+    <string name="send_button_text" translatable="false">Siųsti</string>
+    <string name="reminder_text" translatable="false">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spamą</string>
+
+</resources>

@@ -43,7 +43,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/lecturer_name"
+            android:id="@+id/lecturers_names"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -63,7 +63,7 @@
             android:paddingVertical="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lecturer_name">
+            app:layout_constraintTop_toBottomOf="@id/lecturers_names">
 
             <LinearLayout
                 android:id="@+id/three"
@@ -165,7 +165,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
                 <Button
-                    android:id="@+id/buttonToSite"
+                    android:id="@+id/official_program_site"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:background="@drawable/rounded_background"
@@ -192,16 +192,16 @@
                 android:id="@+id/ratings1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:stretchColumns="0,1">
+                android:stretchColumns="*">
 
                 <TableRow
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     >
 
                     <LinearLayout
                         android:id="@+id/interest"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
@@ -230,7 +230,7 @@
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
-                            android:id="@+id/ratingOfInterest"
+                            android:id="@+id/r_interest"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -249,7 +249,7 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+                            app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                             <TextView
                                 android:id="@+id/evaluationText"
@@ -278,14 +278,17 @@
                             android:layout_height="wrap_content"
                             android:numStars="5"
                             android:saveEnabled="true"
+                            android:layout_marginVertical="10dp"
                             style="?android:attr/ratingBarStyleSmall"
+                            android:scaleX="1.5"
+                            android:scaleY="1.5"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="20dp"
@@ -306,6 +309,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
+                            android:gravity="center"
+                            android:singleLine="false"
                             android:text="@string/amount_of_work_text"
                             android:textColor="#374151"
                             android:textSize="20sp"
@@ -314,7 +319,7 @@
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
-                            android:id="@+id/ratingOfWork"
+                            android:id="@+id/r_work"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -333,7 +338,7 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+                            app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                             <TextView
                                 android:id="@+id/evaluationText2"
@@ -362,17 +367,20 @@
                             android:layout_height="wrap_content"
                             android:numStars="5"
                             android:saveEnabled="true"
-                            style="?android:attr/ratingBarStyleSmall" />
+                            android:layout_marginVertical="10dp"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:scaleX="1.5"
+                            android:scaleY="1.5" />
                     </LinearLayout>
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/rating2"
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="fill_parent">
                     <LinearLayout
                         android:id="@+id/actuality"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@drawable/rounded_background"
@@ -401,7 +409,7 @@
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <TextView
-                            android:id="@+id/ratingOfActuality"
+                            android:id="@+id/r_actuality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -420,7 +428,7 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+                            app:layout_constraintTop_toBottomOf="@id/r_interest">
                             <TextView
                                 android:id="@+id/evaluationText3"
                                 android:layout_width="wrap_content"
@@ -447,14 +455,17 @@
                             android:layout_height="wrap_content"
                             android:numStars="5"
                             android:saveEnabled="true"
+                            android:layout_marginVertical="10dp"
                             style="?android:attr/ratingBarStyleSmall"
+                            android:scaleX="1.5"
+                            android:scaleY="1.5"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent" />
                     </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:background="@drawable/rounded_background"
@@ -483,7 +494,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 />
                             <TextView
-                                android:id="@+id/ratingOfTeaching"
+                                android:id="@+id/r_teaching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
@@ -502,7 +513,7 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/ratingOfInterest">
+                                app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                                 <TextView
                                     android:id="@+id/evaluationText4"
@@ -529,7 +540,10 @@
                                 android:layout_height="wrap_content"
                                 android:saveEnabled="true"
                                 android:numStars="5"
+                                android:layout_marginVertical="10dp"
                                 style="?android:attr/ratingBarStyleSmall"
+                                android:scaleX="1.5"
+                                android:scaleY="1.5"
                                 />
                         </LinearLayout>
                 </TableRow>
@@ -562,17 +576,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp">
+
                     <Spinner
                         android:id="@+id/facultyDrop"
-                        android:layout_height="48dp"
                         android:layout_width="90dp"
+                        android:layout_height="48dp"
                         android:background="@drawable/edit_text_background"
-                        app:backgroundTint="#949494"
                         android:fontFamily="sans-serif"
+                        android:gravity="center"
                         android:spinnerMode="dropdown"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        />
+                        app:backgroundTint="#949494" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -644,6 +659,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp">
                         <TextView
+                            android:id="@+id/comment_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -656,6 +672,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="15dp">
                         <TextView
+                            android:id="@+id/comment_faculty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
