@@ -67,7 +67,7 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         holder.containerLayout.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, SubjectActivity.class);
-//            intent.putExtra("subject", subject);
+            intent.putExtra("subject", subject);
             context.startActivity(intent);
         });
     }

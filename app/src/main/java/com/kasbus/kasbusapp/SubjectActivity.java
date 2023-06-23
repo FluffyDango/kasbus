@@ -27,7 +27,6 @@ import java.util.List;
 
 public class SubjectActivity extends AppCompatActivity implements PostCallback, GetCallback {
 
-    private static Subject current_subject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +48,6 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         spinner.setOnItemSelectedListener(itemSelectedListener);
 
         updateInformation();
-    }
-
-    public static void setSubject(Subject subject) {
-        current_subject = subject;
-    }
-    public static Subject getSubject() {
-        return current_subject;
     }
 
     public void onRatingsReceived(Ratings ratings) {
@@ -94,10 +86,10 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
     }
 
     public void updateInformation() {
-        if (getSubject() == null) {
-            Log.e("test", "subject is null");
-            return;
-        }
+//        if (getSubject() == null) {
+//            Log.e("test", "subject is null");
+//            return;
+//        }
         Button send_button = (Button) findViewById(R.id.send_button);
         send_button.setOnClickListener(view -> {
             APICalls.postComment("testKey2", "MIF", "I love android");
@@ -110,18 +102,18 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         TextView language_type = (TextView) findViewById(R.id.language_type);
         Button official_program_site = (Button) findViewById(R.id.official_program_site);
 
-        Subject subject = getSubject();
-        subject_name.setText(subject.getName());
-        subject_faculty.setText(subject.getFaculty());
-        lecturers_names.setText(subject.getLecturers());
-        credits.setText(subject.getCredits());
-        language_type.setText(subject.getLanguage());
+//        Subject subject = getSubject();
+//        subject_name.setText(subject.getName());
+//        subject_faculty.setText(subject.getFaculty());
+//        lecturers_names.setText(subject.getLecturers());
+//        credits.setText(subject.getCredits());
+//        language_type.setText(subject.getLanguage());
 
         official_program_site.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_BROWSABLE);
-            intent.setData(Uri.parse(subject.getLink()));
+//            intent.setData(Uri.parse(subject.getLink()));
             startActivity(intent);
         });
     }
