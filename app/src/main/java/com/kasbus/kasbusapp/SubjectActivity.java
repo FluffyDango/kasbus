@@ -28,9 +28,11 @@ import com.kasbus.kasbusapp.Containers.Ratings;
 import com.kasbus.kasbusapp.Containers.Subject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SubjectActivity extends AppCompatActivity implements PostCallback, GetCallback {
+    private String comment_faculty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +87,13 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
 
 
     public void onRatingPostComplete() {
-//        EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
         Toast.makeText(SubjectActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
-//        plain_text_input.setText("Successful");
     }
 
     public void onCommentPostComplete() {
         Toast.makeText(SubjectActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
-//        EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
-//        plain_text_input.setText("");
+        EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
+        plain_text_input.setText("");
     }
 
     private void defaultText() {
@@ -176,8 +176,10 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         }
 
         Button send_button = (Button) findViewById(R.id.send_button);
-        send_button.setOnClickListener(view -> {
-            APICalls.postComment("testKey2", "MIF", "I love android");
+        send_button.setOnClickListener(v -> {
+            EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
+            String comment_content = plain_text_input.getText().toString();
+            APICalls.postComment("testKey2", comment_faculty, comment_content);
         });
     }
 
@@ -190,7 +192,7 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String)parent.getItemAtPosition(position);
+                comment_faculty = (String) parent.getItemAtPosition(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
