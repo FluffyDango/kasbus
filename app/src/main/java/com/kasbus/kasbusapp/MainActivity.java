@@ -9,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -22,6 +24,7 @@ import com.kasbus.kasbusapp.Containers.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
@@ -32,11 +35,10 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Constants.PACKAGE_NAME = getApplicationContext().getPackageName();
         SharedPreferences prefs = getSharedPreferences(Constants.PACKAGE_NAME, Context.MODE_PRIVATE);
         if (!prefs.contains("language")) {
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("language", "EN");
+            editor.putString("language", "en");
             editor.commit();
         }
 
@@ -56,9 +58,14 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
         lang_button.setOnClickListener(view -> {
             String current_language = prefs.getString("language", "FAILED");
+            if (current_language.equals("FAILED")) {
+                Log.e(Constants.PACKAGE_NAME,
+                        "Failed to get language: " + current_language);
+                return;
+            }
             String next_language = getNextLanguage(current_language);
             if (next_language == null) {
-                Log.e("main",
+                Log.e(Constants.PACKAGE_NAME,
                         "Unknown language in language preferences: " + current_language);
                 return;
             }
@@ -68,6 +75,16 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
             editor.putString("language", next_language);
             editor.apply();
             setButtonText(next_language);
+
+            Locale lithuanianLocale = new Locale(next_language);
+            Locale.setDefault(lithuanianLocale);
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(lithuanianLocale);
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+            finish();
+            startActivity(getIntent());
         });
     }
 
@@ -144,10 +161,10 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
     private String getNextLanguage(String current_language) {
         String next_language;
-        if (current_language.equals("LT"))
-            next_language = "EN";
-        else if (current_language.equals("EN"))
-            next_language = "LT";
+        if (current_language.equals("lt"))
+            next_language = "en";
+        else if (current_language.equals("en"))
+            next_language = "lt";
         else
             return null;
 
@@ -156,9 +173,10 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
     private void setButtonText(String language) {
         Button lang_button = (Button) findViewById(R.id.lang_button);
-        if (language.equals("EN"))
+        String lang = language.toLowerCase();
+        if (lang.equals("en"))
             lang_button.setText(Html.fromHtml("<big><b>EN</b></big>/<small>LT</small>"));
-        else if (language.equals("LT"))
+        else if (lang.equals("lt"))
             lang_button.setText(Html.fromHtml("<small>EN</small>/<big><b>LT</b></big>"));
         else
             Log.e("main_activity", "Failed to set lang_button text");
