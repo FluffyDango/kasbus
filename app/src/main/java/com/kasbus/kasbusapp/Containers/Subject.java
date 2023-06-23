@@ -71,6 +71,7 @@ public class Subject implements Parcelable {
         language = in.readString();
         exam = in.readByte() != 0;
         hours = in.readInt();
+        link = in.readString();
     }
 
     @Override
@@ -84,6 +85,7 @@ public class Subject implements Parcelable {
         dest.writeString(language);
         dest.writeByte((byte) (exam ? 1 : 0));
         dest.writeInt(hours);
+        dest.writeString(link);
     }
 
     @Override

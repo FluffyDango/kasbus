@@ -19,6 +19,7 @@
     <string name="amount_of_work_text">Amount of work</string>
     <string name="actuality">Actuality</string>
     <string name="teaching">Teaching</string>
+    <string name="empty">-</string>
 
     <string name="leave_comment">Leave your comment here...</string>
     <string name="faculty_text">Faculty</string>

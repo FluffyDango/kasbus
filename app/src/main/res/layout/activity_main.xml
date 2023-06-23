@@ -30,7 +30,6 @@
                 android:layout_width="140dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_background"
                 android:contentDescription="@string/icon_content_descr"
@@ -49,7 +48,6 @@
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/filter"
-                android:onClick="sendToFilterPage"
                 android:padding="16dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/filter_red" />
@@ -111,7 +109,7 @@
         <include
             android:id="@+id/loading_screen"
             layout="@layout/loading_screen"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

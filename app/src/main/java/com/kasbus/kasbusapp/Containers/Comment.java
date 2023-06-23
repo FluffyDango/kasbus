@@ -10,39 +10,30 @@ public class Comment {
     @SerializedName("subjectId")
     private String subjectId;
     @SerializedName("timestamp")
-    private String timestamp;
+    private Timestamp timestamp;
 
-    
-    public String getContent(){
+    public class Timestamp {
+        @SerializedName("_seconds")
+        public Integer seconds;
+        @SerializedName("_nanoseconds")
+        public Integer nano_seconds;
+    }
+
+
+    public String getContent() {
         return content;
     }
 
-//    public void setContent(String newContent){
-//        this.content = newContent;
-//    }
-
-    public String getFaculty(){
+    public String getFaculty() {
         return faculty;
     }
 
-//    public void setFaculty(String newFaculty){
-//        this.faculty = newFaculty;
-//    }
-
-    public String getSubjectId(){
+    public String getSubjectId() {
         return subjectId;
     }
 
-//    public void setSubjectId(String newSubjectId){
-//        this.subjectId = newSubjectId;
-//    }
-
-    public String getTimestamp(){
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-//    public void setTimestamp(String newTimestamp){
-//        this.timestamp = newTimestamp;
-//    }
-    
 }

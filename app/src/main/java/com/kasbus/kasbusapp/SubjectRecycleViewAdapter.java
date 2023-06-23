@@ -51,7 +51,7 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View subjectView = inflater.inflate(R.layout.bus_subject, parent, false);
+        View subjectView = inflater.inflate(R.layout.bus_template, parent, false);
 
         return new ViewHolder(subjectView);
     }

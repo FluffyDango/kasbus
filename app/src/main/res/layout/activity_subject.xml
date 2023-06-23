@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9F1239">
@@ -21,25 +20,28 @@
 
             <TextView
                 android:id="@+id/subject_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.7"
                 android:fontFamily="sans-serif"
+                android:text=""
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:text="Subject"
-                android:textStyle="bold"/>
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/subject_faculty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
                 android:fontFamily="sans-serif"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true"
+                android:text=""
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:text="(Faculty)"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:paddingLeft="10dp" />
+                app:autoSizeTextType="uniform" />
         </LinearLayout>
 
         <TextView
@@ -49,7 +51,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:text="Asist. Dr. Jonas Čiurlionis"
+            android:text=""
             android:paddingVertical="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +90,7 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/amount_of_credits"/>
 
                     <TextView
@@ -96,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
-                        android:text="5"
+                        android:text=""
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -116,14 +118,14 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/subject_language"/>
                     <TextView
                         android:id="@+id/language_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
-                        android:text="lietuvių"
+                        android:text=""
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -143,14 +145,14 @@
                         android:fontFamily="sans-serif"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/amount_of_hours_text"/>
                     <TextView
                         android:id="@+id/hours_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
-                        android:text="48"
+                        android:text=""
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -235,7 +237,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:paddingVertical="10dp"
-                            android:text="4"
+                            android:text=""
                             android:textColor="#374151"
                             android:textSize="24sp"
                             android:textStyle="bold"
@@ -252,7 +254,7 @@
                             app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                             <TextView
-                                android:id="@+id/evaluationText"
+                                android:id="@+id/evaluation_text_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
@@ -262,11 +264,11 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/evaluationRating"
+                                android:id="@+id/evaluation_rating_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
-                                android:text="5"
+                                android:text="@string/empty"
                                 android:textColor="#000000"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -324,7 +326,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:paddingVertical="10dp"
-                            android:text="2"
+                            android:text=""
                             android:textColor="#374151"
                             android:textSize="24sp"
                             android:textStyle="bold"
@@ -341,7 +343,7 @@
                             app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                             <TextView
-                                android:id="@+id/evaluationText2"
+                                android:id="@+id/evaluation_text_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
@@ -351,11 +353,11 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/evaluationRating2"
+                                android:id="@+id/evaluation_rating_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
-                                android:text="5"
+                                android:text="@string/empty"
                                 android:textColor="#000000"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -414,7 +416,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:paddingVertical="10dp"
-                            android:text="3"
+                            android:text=""
                             android:textColor="#374151"
                             android:textSize="24sp"
                             android:textStyle="bold"
@@ -430,7 +432,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/r_interest">
                             <TextView
-                                android:id="@+id/evaluationText3"
+                                android:id="@+id/evaluation_text_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
@@ -438,15 +440,16 @@
                                 android:text="@string/your_evaluation"
                                 android:textColor="#000000"
                                 android:textSize="14sp" />
+
                             <TextView
-                                android:id="@+id/evaluationRating3"
+                                android:id="@+id/evaluation_rating_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
-                                android:text="5"
-                                android:textStyle="bold"
+                                android:text="@string/empty"
                                 android:textColor="#000000"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <RatingBar
@@ -501,7 +504,7 @@
                                 android:textColor="#374151"
                                 android:textSize="24sp"
                                 android:textStyle="bold"
-                                android:text="2"
+                                android:text=""
                                 android:paddingVertical="10dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -516,7 +519,7 @@
                                 app:layout_constraintTop_toBottomOf="@id/r_interest">
 
                                 <TextView
-                                    android:id="@+id/evaluationText4"
+                                    android:id="@+id/evaluation_text_4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="5dp"
@@ -524,15 +527,16 @@
                                     android:text="@string/your_evaluation"
                                     android:textColor="#000000"
                                     android:textSize="14sp" />
+
                                 <TextView
-                                    android:id="@+id/evaluationRating4"
+                                    android:id="@+id/evaluation_rating_4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif"
-                                    android:text="5"
-                                    android:textStyle="bold"
+                                    android:text="@string/empty"
                                     android:textColor="#000000"
-                                    android:textSize="14sp" />
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
                             <RatingBar
                                 android:id="@+id/teachingRating"
@@ -625,64 +629,10 @@
                 app:layout_constraintTop_toBottomOf="@id/send_button"
             />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_background"
-                android:orientation="vertical"
-                android:layout_marginVertical="30dp"
-                android:layout_marginHorizontal="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reminder">
-
-                <TextView
-                    android:id="@+id/commentText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif"
-                    android:text="Dalykas skambėjo idomiai, tačiau dėstymas labai paviršutiniškas, prabėgant šį bei tą, atsainiai, nelendant į gilumą. Nuvylė. Norintiems lengvo, labai daug laiko neužimančio dalyko-BUS (pun intended) lengva "
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/commentText">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15dp">
-                        <TextView
-                            android:id="@+id/comment_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="14sp"
-                            android:textColor="#949494"
-                            android:text="a few months ago"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15dp">
-                        <TextView
-                            android:id="@+id/comment_faculty"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="14sp"
-                            android:textColor="#949494"
-                            android:text="None"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

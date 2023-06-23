@@ -4,7 +4,7 @@
 
     <string name="icon_content_descr" translatable="false">Kasbus paspaudžiamas piktograma</string>
     <string name="language" translatable="false">EN/LT</string>
-    <string name="filter_" translatable="false" >Filtruoti dalykus</string>
+    <string name="filter" translatable="false" >Filtruoti dalykus</string>
     <string name="search_bar_hint" translatable="false">Ieškoti dalykų</string>
     <string name="loading" translatable="false">Kraunama</string>
     <string name="loading_failed" translatable="false">Kraunant įvyko klaida</string>
@@ -19,6 +19,7 @@
     <string name="amount_of_work_text" translatable="false">Darbo apimtis</string>
     <string name="actuality" translatable="false">Aktualumas</string>
     <string name="teaching" translatable="false">Mokymas</string>
+    <string name="empty">-</string>
 
     <string name="leave_comment" translatable="false">Palikite savo komentarą čia</string>
     <string name="faculty_text" translatable="false">Fakultetas</string>

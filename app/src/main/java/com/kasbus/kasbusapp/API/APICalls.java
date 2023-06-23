@@ -90,7 +90,7 @@ public class APICalls {
         if (isGetCallbackSet())
             fetchRatingsFromAPI(api_interface.getSubjectRatings(id));
         else
-            Log.e("API", "fetchRatings ERROR: rating_callback has not been initialized");
+            Log.e("API", "fetchRatings ERROR: get_callback has not been initialized");
     }
 
     private static void fetchRatingsFromAPI(@NonNull Call<Ratings> call) {
@@ -140,8 +140,10 @@ public class APICalls {
      * @param id The subject id that is provided in Subject class
      */
     public static void fetchComments(String id) {
-        if (isGetCallbackSet())
+        if (isGetCallbackSet()) {
             fetchCommentsFromAPI(api_interface.getSubjectComments(id));
+            Log.d("API", "id: " + id);
+        }
         else
             Log.e("API", "get_callback is null");
     }

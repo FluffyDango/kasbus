@@ -25,15 +25,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
-    public static String PACKAGE_NAME;
+
     @SuppressLint("ApplySharedPref")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PACKAGE_NAME = getApplicationContext().getPackageName();
-        SharedPreferences prefs = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+        Constants.PACKAGE_NAME = getApplicationContext().getPackageName();
+        SharedPreferences prefs = getSharedPreferences(Constants.PACKAGE_NAME, Context.MODE_PRIVATE);
         if (!prefs.contains("language")) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("language", "EN");
