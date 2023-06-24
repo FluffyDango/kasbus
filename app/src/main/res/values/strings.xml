@@ -20,28 +20,23 @@
     <string name="actuality">Actuality</string>
     <string name="teaching">Teaching</string>
     <string name="empty">-</string>
+    <string name="delivery_text">Delivery:</string>
+    <string name="exam_text">Exam:</string>
 
     <string name="leave_comment">Leave your comment here...</string>
     <string name="faculty_text">Faculty</string>
     <string name="send_button_text">Send</string>
     <string name="reminder_text">Remember, all of us expect to find valuable and constructive feedback, not just some random spamą</string>
     
-    <string-array name="faculties">
-        <item>CHGF</item>
-        <item>EVAF</item>
-        <item>FLF</item>
-        <item>FILF</item>
-        <item>FF</item>
-        <item>GMC</item>
-        <item>IF</item>
-        <item>KNF</item>
-        <item>KOMF</item>
-        <item>MF</item>
-        <item>ŠA</item>
-        <item>TSPMI</item>
-        <item>TF</item>
-        <item>VM</item>
-        <item>MIF</item>
-        <item>-</item>
-    </string-array>
+    <string name="select_bus_by_text">SELECT BUS BY:</string>
+    <string name="faculties_text">Faculties:</string>
+    <string name="mode_text">Delivery:</string>
+    <string name="remote_text">Remote</string>
+    <string name="on_site_text">On site</string>
+    <string name="hybrid_text">Hybrid</string>
+    <string name="any_text">Any</string>
+    <string name="language_text">Language:</string>
+    <string name="both_text">BOTH</string>
+    <string name="done_text">Done</string>
+    <string name="empty_text">Empty</string>
 </resources>

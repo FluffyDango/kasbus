@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,6 @@ import com.kasbus.kasbusapp.Containers.Ratings;
 import com.kasbus.kasbusapp.Containers.Subject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SubjectActivity extends AppCompatActivity implements PostCallback, GetCallback {
@@ -43,6 +43,7 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         APICalls.setPostCallback(this);
         defaultText();
         updateInformation();
+        setRating();
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,6 +136,8 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         TextView credits = (TextView) findViewById(R.id.credits_amount);
         TextView language = (TextView) findViewById(R.id.language_type);
         TextView hours = (TextView) findViewById(R.id.hours_amount);
+        TextView delivery = (TextView) findViewById(R.id.delivery_type);
+        TextView exam = (TextView) findViewById(R.id.exam_value);
         Button official_program_site = (Button) findViewById(R.id.official_program_site);
 
         Subject subject = (Subject) getIntent().getParcelableExtra("subject");
@@ -146,8 +149,10 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
             subject_faculty.setText("(" + subject.getFaculty() + ")");
             lecturers_names.setText(subject.getLecturers());
             credits.setText(Integer.toString(subject.getCredits()));
-            language.setText(subject.getLanguage());
+            language.setText(subject.getLanguage().equals("lt") ? "Lithuanian" : "English");
             hours.setText(Integer.toString(subject.getHours()));
+            delivery.setText(subject.getDelivery());
+            exam.setText(subject.getExam() ? "yra" : "n");
 
             official_program_site.setOnClickListener(v -> {
                 String link = subject.getLink();
@@ -199,5 +204,41 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
             }
         };
         spinner.setOnItemSelectedListener(itemSelectedListener);
+    }
+
+    private void setRating(){
+        TextView evaluation1 = (TextView) findViewById(R.id.evaluation_rating_1);
+        TextView evaluation2 = (TextView) findViewById(R.id.evaluation_rating_2);
+        TextView evaluation3 = (TextView) findViewById(R.id.evaluation_rating_3);
+        TextView evaluation4 = (TextView) findViewById(R.id.evaluation_rating_4);
+
+        final RatingBar interest_rating = (RatingBar) findViewById(R.id.interest_rating);
+        final RatingBar work_rating = (RatingBar) findViewById(R.id.work_rating);
+        final RatingBar actuality_rating = (RatingBar) findViewById(R.id.actuality_rating);
+        final RatingBar teaching_rating = (RatingBar) findViewById(R.id.teaching_rating);
+
+        interest_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            int evalrating1 = (int) rating;
+            String rating1 = String.valueOf(evalrating1);
+            evaluation1.setText(rating1);
+        });
+
+        work_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            int evalrating2 = (int) rating;
+            String rating2 = String.valueOf(evalrating2);
+            evaluation2.setText(rating2);
+        });
+
+        actuality_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            int evalrating3 = (int) rating;
+            String rating3 = String.valueOf(evalrating3);
+            evaluation3.setText(rating3);
+        });
+
+        teaching_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            int evalrating4 = (int) rating;
+            String rating4 = String.valueOf(evalrating4);
+            evaluation4.setText(rating4);
+        });
     }
 }

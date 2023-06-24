@@ -17,7 +17,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.kasbus.kasbusapp.API.*;
 import com.kasbus.kasbusapp.Containers.*;
@@ -90,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
     @Override
     public void onSubjectsReceived(List<Subject> subjects) {
+        APICalls.setSubjects(subjects);
+
         RecyclerView rv_subjects = (RecyclerView) findViewById(R.id.bus_list);
         SearchView searchView = (SearchView) findViewById(R.id.searchView);
         ConstraintLayout loading_screen = (ConstraintLayout) findViewById(R.id.loading_screen);
@@ -106,18 +110,33 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
-                List<Subject> filteredSubjects = searchSubjects(text, subjects);
-                if (filteredSubjects == null) {
-                    Log.e("filter",
-                            "searchSubjects returned null, subjects array is likely null");
-                    return false;
+                if (APICalls.getSubjects() != null) {
+                    List<Subject> filtered_list = searchSubjects(text, APICalls.getSubjects());
+                    if (filtered_list == null) {
+                        Log.e("filter",
+                                "searchSubjects returned null, subjects array is likely null");
+                        return false;
+                    }
+                    adapter.setSubjects(filtered_list);
+                } else  {
+                    Log.e("kasbus", "Subjects are null in APICalls");
                 }
-                adapter.setSubjects(filteredSubjects);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String text) {
+                if (APICalls.getSubjects() != null) {
+                    List<Subject> filtered_list = searchSubjects(text, APICalls.getSubjects());
+                    if (filtered_list == null) {
+                        Log.e("filter",
+                                "searchSubjects returned null, subjects array is likely null");
+                        return false;
+                    }
+                    adapter.setSubjects(filtered_list);
+                } else  {
+                    Log.e("kasbus", "Subjects are null in APICalls");
+                }
                 return true;
             }
         });

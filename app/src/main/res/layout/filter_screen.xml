@@ -7,178 +7,266 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Bus By:"
+            android:text="@string/faculties_text"
+            android:textSize="30sp"
             android:textColor="#FFFFFF"
-            android:textSize="40sp"
-            android:layout_gravity="center"
-            android:elevation="4dp"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Faculties"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF" />
+            android:textStyle="bold"/>
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="2"
             android:rowCount="8"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:layout_gravity="center">
 
             <CheckBox
                 android:id="@+id/checkBoxFILF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FILF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginRight="50dp"
+                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxTSPMI"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TSPMI"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxFF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxGMC"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GMC"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxKNF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="KNF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxTF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxKOMF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="KOMF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxVM"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VM"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxIF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="IF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxEVAF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EVAF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxMF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxŠA"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ŠA"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxFLF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FLF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:layout_marginRight="50dp"
+                                android:buttonTint="#C0C0C0"/>
 
             <CheckBox
                 android:id="@+id/checkBoxCHGF"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CHGF"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                                android:textSize="20sp"
+                                android:buttonTint="#C0C0C0"/>
 
         </GridLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Mode"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF" />
+            android:text="@string/mode_text"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/radioButtonRemote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remote"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/remote_text"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:buttonTint="#C0C0C0"/>
 
             <RadioButton
                 android:id="@+id/radioButtonOnSite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="On Site"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/on_site_text"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:buttonTint="#C0C0C0"/>
 
             <RadioButton
                 android:id="@+id/radioButtonHybrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hybrid"
-                android:textColor="#FFFFFF"/>
+                android:text="@string/hybrid_text"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:buttonTint="#C0C0C0"/>
+
+            <RadioButton
+                            android:id="@+id/radioButtonAny"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/any_text"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:buttonTint="#C0C0C0"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language_text"
+            android:textSize="30sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButtonEN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EN"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:buttonTint="#C0C0C0"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonLT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LT"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:buttonTint="#C0C0C0"/>
+
+                        <RadioButton
+                            android:id="@+id/radioButtonBOTH"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/both_text"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:buttonTint="#C0C0C0"/>
+
         </RadioGroup>
 
         <Button
             android:id="@+id/doneButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:padding="10dp"
-            android:text="Done"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/rounded_background"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#CF3759"/>
+            android:text="@string/done_text"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp" />
+
+        <Button
+                    android:id="@+id/emptyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_text"
+                    android:textSize="20sp"
+                    android:layout_marginTop="24dp" />
+
     </LinearLayout>
 </ScrollView>

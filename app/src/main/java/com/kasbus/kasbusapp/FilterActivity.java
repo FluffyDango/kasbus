@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,6 +68,8 @@ public class FilterActivity extends Activity {
         }
 
         Button doneButton = findViewById(R.id.doneButton);
+        Button emptyButton = findViewById(R.id.emptyButton);
+        
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +98,32 @@ public class FilterActivity extends Activity {
                 sharedPreferences.edit().putString("SavedOption", selectedOption).apply();
 
                 finish();
+            }
+        });
+
+        emptyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBoxFILF.setChecked(false);
+                checkBoxTSPMI.setChecked(false);
+                checkBoxFF.setChecked(false);
+                checkBoxGMC.setChecked(false);
+                checkBoxKNF.setChecked(false);
+                checkBoxTF.setChecked(false);
+                checkBoxKOMF.setChecked(false);
+                checkBoxVM.setChecked(false);
+                checkBoxIF.setChecked(false);
+                checkBoxEVAF.setChecked(false);
+                checkBoxMF.setChecked(false);
+                checkBoxŠA.setChecked(false);
+                checkBoxFLF.setChecked(false);
+                checkBoxCHGF.setChecked(false);
+
+                radioButtonRemote.setChecked(false);
+                radioButtonOnSite.setChecked(false);
+                radioButtonHybrid.setChecked(false);
+
+                sharedPreferences.edit().clear().apply();
             }
         });
     }

@@ -20,10 +20,23 @@
     <string name="actuality" translatable="false">Aktualumas</string>
     <string name="teaching" translatable="false">Mokymas</string>
     <string name="empty">-</string>
+    <string name="delivery_text">Įgyvendinimo forma:</string>
+    <string name="exam_text">Vertinimo metodai:</string>
 
     <string name="leave_comment" translatable="false">Palikite savo komentarą čia</string>
     <string name="faculty_text" translatable="false">Fakultetas</string>
     <string name="send_button_text" translatable="false">Siųsti</string>
     <string name="reminder_text" translatable="false">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spamą</string>
 
+    <string name="select_bus_by_text">PASIRINKTI BUS PAGAL:</string>
+    <string name="faculties_text">Fakultetai:</string>
+    <string name="mode_text">Būdas:</string>
+    <string name="remote_text">Nuotolinė</string>
+    <string name="on_site_text">Auditorinė</string>
+    <string name="hybrid_text">Auditorinė/nuotolinė</string>
+    <string name="any_text">Bet koks</string>
+    <string name="language_text">Kalba:</string>
+    <string name="both_text">ABU</string>
+    <string name="done_text">Patvirtinti</string>
+    <string name="empty_text">Išvalyti</string>
 </resources>
