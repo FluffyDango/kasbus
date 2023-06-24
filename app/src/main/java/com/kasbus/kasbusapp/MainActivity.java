@@ -17,9 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RatingBar;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.kasbus.kasbusapp.API.*;
 import com.kasbus.kasbusapp.Containers.*;
@@ -35,85 +33,41 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = initPreferences();
+        changeLocale(prefs);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences(Constants.PACKAGE_NAME, Context.MODE_PRIVATE);
-        if (!prefs.contains("language")) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("language", "en");
-            editor.commit();
-        }
-
-        ImageButton filter = (ImageButton) findViewById(R.id.filter);
-        filter.setOnClickListener(view -> {
-            Context context = view.getContext();
-            Intent intent = new Intent(context, FilterActivity.class);
-            context.startActivity(intent);
-        });
-
-        Button lang_button = (Button) findViewById(R.id.lang_button);
-
+        setFilterOnClick();
         APICalls.setSubjectCallback(this);
-        String lang = prefs.getString("language", "FAILED");
+        String lang = prefs.getString("language", "");
         APICalls.fetchSubjects(lang);
         setButtonText(lang);
-
-        lang_button.setOnClickListener(view -> {
-            String current_language = prefs.getString("language", "FAILED");
-            if (current_language.equals("FAILED")) {
-                Log.e(Constants.PACKAGE_NAME,
-                        "Failed to get language: " + current_language);
-                return;
-            }
-            String next_language = getNextLanguage(current_language);
-            if (next_language == null) {
-                Log.e(Constants.PACKAGE_NAME,
-                        "Unknown language in language preferences: " + current_language);
-                return;
-            }
-
-            SharedPreferences.Editor editor = prefs.edit();
-            APICalls.fetchSubjects(next_language);
-            editor.putString("language", next_language);
-            editor.apply();
-            setButtonText(next_language);
-
-            Locale lithuanianLocale = new Locale(next_language);
-            Locale.setDefault(lithuanianLocale);
-            Resources resources = getResources();
-            Configuration configuration = resources.getConfiguration();
-            configuration.setLocale(lithuanianLocale);
-            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-
-            finish();
-            startActivity(getIntent());
-        });
+        setLangButtonOnClick(prefs);
     }
 
     @Override
     public void onSubjectsReceived(List<Subject> subjects) {
         APICalls.setSubjects(subjects);
 
-        RecyclerView rv_subjects = (RecyclerView) findViewById(R.id.bus_list);
-        SearchView searchView = (SearchView) findViewById(R.id.searchView);
-        ConstraintLayout loading_screen = (ConstraintLayout) findViewById(R.id.loading_screen);
-        ConstraintLayout retry_loading_screen = (ConstraintLayout) findViewById(R.id.retry_loading_screen);
-
+        RecyclerView rv_subjects = findViewById(R.id.bus_list);
         SubjectRecycleViewAdapter adapter = new SubjectRecycleViewAdapter(subjects);
         rv_subjects.setAdapter(adapter);
         rv_subjects.setLayoutManager(new LinearLayoutManager(this));
 
+        ConstraintLayout loading_screen = findViewById(R.id.loading_screen);
+        ConstraintLayout retry_loading_screen = findViewById(R.id.retry_loading_screen);
         loading_screen.setVisibility(View.GONE);
         retry_loading_screen.setVisibility(View.GONE);
         rv_subjects.setVisibility(View.VISIBLE);
 
+        SearchView searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
                 if (APICalls.getSubjects() != null) {
                     List<Subject> filtered_list = searchSubjects(text, APICalls.getSubjects());
                     if (filtered_list == null) {
-                        Log.e("filter",
+                        Log.e("kasbus",
                                 "searchSubjects returned null, subjects array is likely null");
                         return false;
                     }
@@ -126,16 +80,8 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
             @Override
             public boolean onQueryTextChange(String text) {
-                if (APICalls.getSubjects() != null) {
-                    List<Subject> filtered_list = searchSubjects(text, APICalls.getSubjects());
-                    if (filtered_list == null) {
-                        Log.e("filter",
-                                "searchSubjects returned null, subjects array is likely null");
-                        return false;
-                    }
-                    adapter.setSubjects(filtered_list);
-                } else  {
-                    Log.e("kasbus", "Subjects are null in APICalls");
+                if (text.isEmpty() && APICalls.getSubjects() != null) {
+                    adapter.setSubjects(APICalls.getSubjects());
                 }
                 return true;
             }
@@ -144,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
     @Override
     public void onSubjectFailure(String language) {
-        ConstraintLayout retry_loading_screen = (ConstraintLayout) findViewById(R.id.retry_loading_screen);
-        Button retry_button = (Button) findViewById(R.id.retry_button);
-        ConstraintLayout loading_screen = (ConstraintLayout) findViewById(R.id.loading_screen);
+        ConstraintLayout retry_loading_screen = findViewById(R.id.retry_loading_screen);
+        Button retry_button = findViewById(R.id.retry_button);
+        ConstraintLayout loading_screen = findViewById(R.id.loading_screen);
 
         retry_loading_screen.setVisibility(View.VISIBLE);
         loading_screen.setVisibility(View.GONE);
@@ -191,14 +137,77 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
     }
 
     private void setButtonText(String language) {
-        Button lang_button = (Button) findViewById(R.id.lang_button);
+        Button lang_button = findViewById(R.id.lang_button);
         String lang = language.toLowerCase();
         if (lang.equals("en"))
             lang_button.setText(Html.fromHtml("<big><b>EN</b></big>/<small>LT</small>"));
         else if (lang.equals("lt"))
             lang_button.setText(Html.fromHtml("<small>EN</small>/<big><b>LT</b></big>"));
         else
-            Log.e("main_activity", "Failed to set lang_button text");
+            Log.e("kasbus", "Failed to set lang_button text");
     }
 
+    private void setFilterOnClick() {
+        ImageButton filter = findViewById(R.id.filter);
+        filter.setOnClickListener(view -> {
+            Context context = view.getContext();
+            Intent intent = new Intent(context, FilterActivity.class);
+            context.startActivity(intent);
+        });
+    }
+
+    private void setLangButtonOnClick(SharedPreferences prefs) {
+        Button lang_button = findViewById(R.id.lang_button);
+        lang_button.setOnClickListener(view -> {
+
+            String current_language = prefs.getString("language", "");
+            if (current_language.isEmpty()) {
+                Log.e("kasbus",
+                        "Failed to get language: " + current_language);
+                return;
+            }
+            String next_language = getNextLanguage(current_language);
+            if (next_language == null) {
+                Log.e("kasbus",
+                        "Unknown language in language preferences: " + current_language);
+                return;
+            }
+
+            SharedPreferences.Editor editor = prefs.edit();
+            APICalls.fetchSubjects(next_language);
+            editor.putString("language", next_language);
+            editor.apply();
+            setButtonText(next_language);
+
+            changeLocale(prefs);
+
+            // Reload activity to update language
+            finish();
+            startActivity(getIntent());
+        });
+    }
+
+    @SuppressLint("ApplySharedPref")
+    private SharedPreferences initPreferences() {
+        String app_name = getResources().getString(R.string.app_name);
+        SharedPreferences prefs = getSharedPreferences(app_name, Context.MODE_PRIVATE);
+        if (!prefs.contains("language")) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("language", "en");
+            editor.commit();
+        }
+        return prefs;
+    }
+
+    private void changeLocale(SharedPreferences prefs) {
+        String language = prefs.getString("language", "");
+        if (!language.isEmpty()) {
+            Locale lithuanianLocale = new Locale(language);
+            Locale.setDefault(lithuanianLocale);
+            Resources resources = getResources();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(lithuanianLocale);
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        }
+    }
 }

@@ -3,128 +3,116 @@ package com.kasbus.kasbusapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.GridLayout;
 import android.widget.RadioButton;
-import java.util.HashSet;
-import java.util.Set;
+import android.widget.RadioGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilterActivity extends Activity {
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(Bundle.EMPTY);
         setContentView(R.layout.filter_screen);
 
-        sharedPreferences = getSharedPreferences("Selection", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("filter", Context.MODE_PRIVATE);
 
-        CheckBox checkBoxFILF = findViewById(R.id.checkBoxFILF);
-        CheckBox checkBoxTSPMI = findViewById(R.id.checkBoxTSPMI);
-        CheckBox checkBoxFF = findViewById(R.id.checkBoxFF);
-        CheckBox checkBoxGMC = findViewById(R.id.checkBoxGMC);
-        CheckBox checkBoxKNF = findViewById(R.id.checkBoxKNF);
-        CheckBox checkBoxTF = findViewById(R.id.checkBoxTF);
-        CheckBox checkBoxKOMF = findViewById(R.id.checkBoxKOMF);
-        CheckBox checkBoxVM = findViewById(R.id.checkBoxVM);
-        CheckBox checkBoxIF = findViewById(R.id.checkBoxIF);
-        CheckBox checkBoxEVAF = findViewById(R.id.checkBoxEVAF);
-        CheckBox checkBoxMF = findViewById(R.id.checkBoxMF);
-        CheckBox checkBoxŠA = findViewById(R.id.checkBoxŠA);
-        CheckBox checkBoxFLF = findViewById(R.id.checkBoxFLF);
-        CheckBox checkBoxCHGF = findViewById(R.id.checkBoxCHGF);
-
-        RadioButton radioButtonRemote = findViewById(R.id.radioButtonRemote);
-        RadioButton radioButtonOnSite = findViewById(R.id.radioButtonOnSite);
-        RadioButton radioButtonHybrid = findViewById(R.id.radioButtonHybrid);
-
-        Set<String> savedSelectionSet = sharedPreferences.getStringSet("SavedFaculties", new HashSet<String>());
-        String selectedOption = sharedPreferences.getString("SavedOption", "");
-
-        checkBoxFILF.setChecked(savedSelectionSet.contains("FILF"));
-        checkBoxTSPMI.setChecked(savedSelectionSet.contains("TSPMI"));
-        checkBoxFF.setChecked(savedSelectionSet.contains("FF"));
-        checkBoxGMC.setChecked(savedSelectionSet.contains("GMC"));
-        checkBoxKNF.setChecked(savedSelectionSet.contains("KNF"));
-        checkBoxTF.setChecked(savedSelectionSet.contains("TF"));
-        checkBoxKOMF.setChecked(savedSelectionSet.contains("KOMF"));
-        checkBoxVM.setChecked(savedSelectionSet.contains("VM"));
-        checkBoxIF.setChecked(savedSelectionSet.contains("IF"));
-        checkBoxEVAF.setChecked(savedSelectionSet.contains("EVAF"));
-        checkBoxMF.setChecked(savedSelectionSet.contains("MF"));
-        checkBoxŠA.setChecked(savedSelectionSet.contains("ŠA"));
-        checkBoxFLF.setChecked(savedSelectionSet.contains("FLF"));
-        checkBoxCHGF.setChecked(savedSelectionSet.contains("CHGF"));
-
-        if (selectedOption.equals("Remote")) {
-            radioButtonRemote.setChecked(true);
-        } else if (selectedOption.equals("On Site")) {
-            radioButtonOnSite.setChecked(true);
-        } else if (selectedOption.equals("Hybrid")) {
-            radioButtonHybrid.setChecked(true);
-        }
+        setFacultyCheckboxes();
+        setDeliveryGroup();
+        setLanguageGroup();
 
         Button doneButton = findViewById(R.id.doneButton);
         Button emptyButton = findViewById(R.id.emptyButton);
-        
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Set<String> selectionSet = new HashSet<>();
-                if (checkBoxFILF.isChecked()) selectionSet.add("FILF");
-                if (checkBoxTSPMI.isChecked()) selectionSet.add("TSPMI");
-                if (checkBoxFF.isChecked()) selectionSet.add("FF");
-                if (checkBoxGMC.isChecked()) selectionSet.add("GMC");
-                if (checkBoxKNF.isChecked()) selectionSet.add("KNF");
-                if (checkBoxTF.isChecked()) selectionSet.add("TF");
-                if (checkBoxKOMF.isChecked()) selectionSet.add("KOMF");
-                if (checkBoxVM.isChecked()) selectionSet.add("VM");
-                if (checkBoxIF.isChecked()) selectionSet.add("IF");
-                if (checkBoxEVAF.isChecked()) selectionSet.add("EVAF");
-                if (checkBoxMF.isChecked()) selectionSet.add("MF");
-                if (checkBoxŠA.isChecked()) selectionSet.add("ŠA");
-                if (checkBoxFLF.isChecked()) selectionSet.add("FLF");
-                if (checkBoxCHGF.isChecked()) selectionSet.add("CHGF");
 
-                String selectedOption = "";
-                if (radioButtonRemote.isChecked()) selectedOption = "Remote";
-                else if (radioButtonOnSite.isChecked()) selectedOption = "On Site";
-                else if (radioButtonHybrid.isChecked()) selectedOption = "Hybrid";
-
-                sharedPreferences.edit().putStringSet("SavedFaculties", selectionSet).apply();
-                sharedPreferences.edit().putString("SavedOption", selectedOption).apply();
-
-                finish();
-            }
+        doneButton.setOnClickListener(v -> {
+            finish();
         });
+        emptyButton.setOnClickListener(v -> {
+            prefs.edit().clear().apply();
+            setFacultyCheckboxes();
+            setDeliveryGroup();
+            setLanguageGroup();
+        });
+    }
 
-        emptyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkBoxFILF.setChecked(false);
-                checkBoxTSPMI.setChecked(false);
-                checkBoxFF.setChecked(false);
-                checkBoxGMC.setChecked(false);
-                checkBoxKNF.setChecked(false);
-                checkBoxTF.setChecked(false);
-                checkBoxKOMF.setChecked(false);
-                checkBoxVM.setChecked(false);
-                checkBoxIF.setChecked(false);
-                checkBoxEVAF.setChecked(false);
-                checkBoxMF.setChecked(false);
-                checkBoxŠA.setChecked(false);
-                checkBoxFLF.setChecked(false);
-                checkBoxCHGF.setChecked(false);
+    private void setFacultyCheckboxes() {
+        GridLayout grid_faculties = findViewById(R.id.grid_faculties);
+        String[] faculties = getResources().getStringArray(R.array.all_faculties);
 
-                radioButtonRemote.setChecked(false);
-                radioButtonOnSite.setChecked(false);
-                radioButtonHybrid.setChecked(false);
+        if (grid_faculties.getChildCount() == 0) {
+            List<CheckBox> checkbox_list = new ArrayList<>(faculties.length);
+            for (int i = 0; i < faculties.length; i++) {
+                int [][] states = {{android.R.attr.state_checked}, {}};
+                int sand_color = Color.parseColor("#C0C0C0");
+                int [] colors = {sand_color, sand_color};
 
-                sharedPreferences.edit().clear().apply();
+                checkbox_list.add(new CheckBox(getApplicationContext()));
+                checkbox_list.get(i).setText(faculties[i]);
+                checkbox_list.get(i).setButtonTintList(new ColorStateList(states, colors));
+                checkbox_list.get(i).setTextColor(Color.WHITE);
+                checkbox_list.get(i).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+                String key = "faculty_filter" + Integer.toString(i);
+                checkbox_list.get(i).setChecked(!prefs.contains(key));
+                checkbox_list.get(i).setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt(key, buttonView.getId());
+                    editor.apply();
+                });
+
+                grid_faculties.addView(checkbox_list.get(i));
             }
+        } else {
+            for (int i = 0; i < grid_faculties.getChildCount(); i++) {
+                CheckBox button = (CheckBox) grid_faculties.getChildAt(i);
+                button.setChecked(true);
+            }
+        }
+    }
+
+    private void setDeliveryGroup() {
+        int selected_delivery = prefs.getInt("filter_delivery", 0);
+        RadioButton delivery_button;
+        if (selected_delivery != 0) {
+            delivery_button = findViewById(selected_delivery);
+        } else {
+            delivery_button = findViewById(R.id.filter_delivery_any);
+        }
+        delivery_button.setChecked(true);
+
+        RadioGroup delivery_group = findViewById(R.id.delivery_group);
+        delivery_group.setOnCheckedChangeListener((group, checkedId) -> {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("filter_delivery", checkedId);
+            editor.apply();
+        });
+    }
+
+    private void setLanguageGroup() {
+        int selected_language = prefs.getInt("filter_language", 0);
+        RadioButton lang_button;
+        if (selected_language != 0) {
+            lang_button = findViewById(selected_language);
+        } else {
+            lang_button = findViewById(R.id.filter_language_any);
+        }
+        lang_button.setChecked(true);
+
+        RadioGroup language_group = findViewById(R.id.language_group);
+        language_group.setOnCheckedChangeListener((group, checkedId) -> {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("filter_language", checkedId);
+            editor.apply();
         });
     }
 }

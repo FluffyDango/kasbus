@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9F1239">
@@ -174,7 +175,7 @@
                         android:textSize="16sp"
                         android:layout_marginEnd="5dp"
                         android:text="@string/delivery_text"/>
-                    <TextView 
+                    <TextView
                         android:id="@+id/delivery_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -202,7 +203,7 @@
                         android:textSize="16sp"
                         android:layout_marginEnd="5dp"
                         android:text="@string/exam_text"/>
-                    <TextView 
+                    <TextView
                         android:id="@+id/exam_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -222,17 +223,19 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
                 <Button
                     android:id="@+id/official_program_site"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="0dp"
                     android:background="@drawable/rounded_background"
-                    app:backgroundTint="#FFFFFF"
                     android:fontFamily="sans-serif"
                     android:text="@string/go_to_site"
                     android:textColor="#000000"
                     android:textSize="14sp"
-                />
+                    app:backgroundTint="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
 
@@ -332,13 +335,14 @@
 
                         <RatingBar
                             android:id="@+id/interest_rating"
+                            style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
+                            android:contentDescription="@string/rating_content_descr"
+                            android:isIndicator="false"
                             android:numStars="5"
                             android:saveEnabled="true"
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:isIndicator="false"
                             android:scaleX="1.5"
                             android:scaleY="1.5"
                             android:stepSize="1"
@@ -423,16 +427,17 @@
 
                         <RatingBar
                             android:id="@+id/work_rating"
+                            style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:contentDescription="@string/rating_content_descr"
+                            android:isIndicator="false"
                             android:numStars="5"
                             android:saveEnabled="true"
-                            android:layout_marginVertical="10dp"
-                            android:stepSize="1"
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:isIndicator="false"
                             android:scaleX="1.5"
-                            android:scaleY="1.5" />
+                            android:scaleY="1.5"
+                            android:stepSize="1" />
                     </LinearLayout>
                 </TableRow>
 
@@ -514,16 +519,17 @@
 
                         <RatingBar
                             android:id="@+id/actuality_rating"
+                            style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
+                            android:contentDescription="@string/rating_content_descr"
+                            android:isIndicator="false"
                             android:numStars="5"
                             android:saveEnabled="true"
-                            android:stepSize="1"
-                            style="?android:attr/ratingBarStyleSmall"
-                            android:isIndicator="false"
                             android:scaleX="1.5"
                             android:scaleY="1.5"
+                            android:stepSize="1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
@@ -600,18 +606,20 @@
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
+
                             <RatingBar
                                 android:id="@+id/teaching_rating"
+                                style="?android:attr/ratingBarStyleSmall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:saveEnabled="true"
-                                android:numStars="5"
                                 android:layout_marginVertical="10dp"
-                                android:stepSize="1"
-                                style="?android:attr/ratingBarStyleSmall"
+                                android:contentDescription="@string/rating_content_descr"
                                 android:isIndicator="false"
+                                android:numStars="5"
+                                android:saveEnabled="true"
                                 android:scaleX="1.5"
-                                android:scaleY="1.5"/>
+                                android:scaleY="1.5"
+                                android:stepSize="1" />
                         </LinearLayout>
                 </TableRow>
 
@@ -623,15 +631,16 @@
 
             <EditText
                 android:id="@+id/plain_text_input"
-                android:layout_height="48dp"
                 android:layout_width="match_parent"
-                android:importantForAutofill="no"
+                android:layout_height="48dp"
                 android:layout_margin="15dp"
-                android:padding="10dp"
-                android:inputType="text"
+                android:background="@drawable/edit_text_background"
                 android:fontFamily="sans-serif"
                 android:hint="@string/leave_comment"
-                android:background="@drawable/edit_text_background"/>
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="10dp"
+                tools:ignore="TextContrastCheck" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -654,7 +663,8 @@
                         android:spinnerMode="dropdown"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        app:backgroundTint="#949494" />
+                        app:backgroundTint="#949494"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectActivity extends AppCompatActivity implements PostCallback, GetCallback {
-    private String comment_faculty;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +42,16 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         APICalls.setPostCallback(this);
         defaultText();
         updateInformation();
-        setRating();
     }
 
     @SuppressLint("SetTextI18n")
     public void onRatingsReceived(Ratings ratings) {
-//        Toast.makeText(SubjectActivity.this,"Ratings GetReceived",Toast.LENGTH_SHORT).show();
         List<TextView> r_textview_array = new ArrayList<TextView>() {
             {
-                add((TextView) findViewById(R.id.r_interest));
-                add((TextView) findViewById(R.id.r_work));
-                add((TextView) findViewById(R.id.r_actuality));
-                add((TextView) findViewById(R.id.r_teaching));
+                add(findViewById(R.id.r_interest));
+                add(findViewById(R.id.r_work));
+                add(findViewById(R.id.r_actuality));
+                add(findViewById(R.id.r_teaching));
             }
         };
         List<Double> r_value_array = new ArrayList<Double>() {
@@ -77,33 +74,30 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
     }
 
     public void onCommentsReceived(List<Comment> comments) {
-        Toast.makeText(SubjectActivity.this,"Comments getReceived",Toast.LENGTH_SHORT).show();
-
-        RecyclerView rv_comments = (RecyclerView) findViewById(R.id.comment_list);
+        RecyclerView rv_comments = findViewById(R.id.comment_list);
 
         CommentRecycleViewAdapter adapter = new CommentRecycleViewAdapter(comments);
         rv_comments.setAdapter(adapter);
         rv_comments.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
     public void onRatingPostComplete() {
-        Toast.makeText(SubjectActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
+        Toast.makeText(SubjectActivity.this,"Successfully Ratings posted",Toast.LENGTH_SHORT).show();
     }
 
     public void onCommentPostComplete() {
-        Toast.makeText(SubjectActivity.this,"Successfully posted",Toast.LENGTH_SHORT).show();
-        EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
+        Toast.makeText(SubjectActivity.this,"Successfully Ratings posted",Toast.LENGTH_SHORT).show();
+        EditText plain_text_input = findViewById(R.id.plain_text_input);
         plain_text_input.setText("");
     }
 
     private void defaultText() {
-        TextView subject_name = (TextView) findViewById(R.id.subject_name);
-        TextView subject_faculty = (TextView) findViewById(R.id.subject_faculty);
-        TextView lecturers_names = (TextView) findViewById(R.id.lecturers_names);
-        TextView credits = (TextView) findViewById(R.id.credits_amount);
-        TextView language_type = (TextView) findViewById(R.id.language_type);
-        Button official_program_site = (Button) findViewById(R.id.official_program_site);
+        TextView subject_name = findViewById(R.id.subject_name);
+        TextView subject_faculty = findViewById(R.id.subject_faculty);
+        TextView lecturers_names = findViewById(R.id.lecturers_names);
+        TextView credits = findViewById(R.id.credits_amount);
+        TextView language_type = findViewById(R.id.language_type);
+        Button official_program_site = findViewById(R.id.official_program_site);
 
         subject_name.setText("?");
         subject_faculty.setText("?");
@@ -113,132 +107,158 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         official_program_site.setOnClickListener(v -> {
         });
 
-        TextView r_interest = (TextView) findViewById(R.id.r_interest);
-        TextView r_work = (TextView) findViewById(R.id.r_work);
-        TextView r_actuality = (TextView) findViewById(R.id.r_actuality);
-        TextView r_teaching = (TextView) findViewById(R.id.r_teaching);
+        TextView r_interest = findViewById(R.id.r_interest);
+        TextView r_work = findViewById(R.id.r_work);
+        TextView r_actuality = findViewById(R.id.r_actuality);
+        TextView r_teaching = findViewById(R.id.r_teaching);
 
         r_interest.setText("?");
         r_work.setText("?");
         r_actuality.setText("?");
         r_teaching.setText("?");
 
-        RecyclerView rv_comments = (RecyclerView) findViewById(R.id.comment_list);
-
+        RecyclerView rv_comments = findViewById(R.id.comment_list);
         rv_comments.setAdapter(new CommentRecycleViewAdapter(new ArrayList<>()));
+
+        Button send_button = findViewById(R.id.send_button);
+        send_button.setOnClickListener(v -> {
+        });
     }
 
     @SuppressLint("SetTextI18n")
     private void updateInformation() {
-        TextView subject_name = (TextView) findViewById(R.id.subject_name);
-        TextView subject_faculty = (TextView) findViewById(R.id.subject_faculty);
-        TextView lecturers_names = (TextView) findViewById(R.id.lecturers_names);
-        TextView credits = (TextView) findViewById(R.id.credits_amount);
-        TextView language = (TextView) findViewById(R.id.language_type);
-        TextView hours = (TextView) findViewById(R.id.hours_amount);
-        TextView delivery = (TextView) findViewById(R.id.delivery_type);
-        TextView exam = (TextView) findViewById(R.id.exam_value);
-        Button official_program_site = (Button) findViewById(R.id.official_program_site);
+        TextView subject_name = findViewById(R.id.subject_name);
+        TextView subject_faculty = findViewById(R.id.subject_faculty);
+        TextView lecturers_names = findViewById(R.id.lecturers_names);
+        TextView credits = findViewById(R.id.credits_amount);
+        TextView language = findViewById(R.id.language_type);
+        TextView hours = findViewById(R.id.hours_amount);
+        TextView delivery = findViewById(R.id.delivery_type);
+        TextView exam = findViewById(R.id.exam_value);
+        Button official_program_site = findViewById(R.id.official_program_site);
 
-        Subject subject = (Subject) getIntent().getParcelableExtra("subject");
+        Subject subject = getIntent().getParcelableExtra("subject");
         if (subject != null) {
             APICalls.fetchRatings(subject.getId());
             APICalls.fetchComments(subject.getId());
+
+            Resources res = getResources();
 
             subject_name.setText(subject.getName() + "");
             subject_faculty.setText("(" + subject.getFaculty() + ")");
             lecturers_names.setText(subject.getLecturers());
             credits.setText(Integer.toString(subject.getCredits()));
-            language.setText(subject.getLanguage().equals("lt") ? "Lithuanian" : "English");
+
+            String lt = res.getString(R.string.lithuanian);
+            String en = res.getString(R.string.english);
+            String lang_text = subject.getLanguage().equals("lt") ? lt : en;
+            language.setText(lang_text);
+
             hours.setText(Integer.toString(subject.getHours()));
-            delivery.setText(subject.getDelivery());
-            exam.setText(subject.getExam() ? "yra" : "n");
+
+            String delivery_data = subject.getDelivery();
+            String delivery_text;
+            switch (delivery_data) {
+                case "blended":
+                    delivery_text = res.getString(R.string.hybrid);
+                    break;
+                case "online":
+                    delivery_text = res.getString(R.string.remote);
+                    break;
+                case "face":
+                    delivery_text = res.getString(R.string.on_site);
+                    break;
+                default:
+                    delivery_text = "";
+                    break;
+            }
+            delivery.setText(delivery_text);
+
+            String yes = res.getString(R.string.yes);
+            String no = res.getString(R.string.no);
+            String exam_text = subject.getExam() ? yes : no;
+            exam.setText(exam_text);
 
             official_program_site.setOnClickListener(v -> {
                 String link = subject.getLink();
-                Log.d("test", link);
                 Uri uri = Uri.parse(link);
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(launchBrowser);
             });
+
+            updateRatings(subject.getId());
         }
-
-        List<TextView> eval_textview_array = new ArrayList<TextView>() {
-            {
-                add((TextView) findViewById(R.id.evaluation_rating_1));
-                add((TextView) findViewById(R.id.evaluation_rating_2));
-                add((TextView) findViewById(R.id.evaluation_rating_3));
-                add((TextView) findViewById(R.id.evaluation_rating_4));
-            }
-        };
-
-        SharedPreferences prefs = getSharedPreferences(Constants.PACKAGE_NAME, Context.MODE_PRIVATE);
-        for (int i = 0; i < eval_textview_array.size(); i++) {
-            int eval = prefs.getInt("eval_" + i, -1);
-            if (eval != -1) {
-                eval_textview_array.get(i).setText(Integer.toString(eval));
-            }
-        }
-
-        Button send_button = (Button) findViewById(R.id.send_button);
-        send_button.setOnClickListener(v -> {
-            EditText plain_text_input = (EditText) findViewById(R.id.plain_text_input);
-            String comment_content = plain_text_input.getText().toString();
-            APICalls.postComment("testKey2", comment_faculty, comment_content);
-        });
     }
 
     private void setSpinner() {
         Spinner spinner = findViewById(R.id.facultyDrop);
+        String[] faculties = getResources().getStringArray(R.array.all_faculties);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Constants.FACULTIES);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faculties);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                comment_faculty = (String) parent.getItemAtPosition(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        };
-        spinner.setOnItemSelectedListener(itemSelectedListener);
     }
 
-    private void setRating(){
-        TextView evaluation1 = (TextView) findViewById(R.id.evaluation_rating_1);
-        TextView evaluation2 = (TextView) findViewById(R.id.evaluation_rating_2);
-        TextView evaluation3 = (TextView) findViewById(R.id.evaluation_rating_3);
-        TextView evaluation4 = (TextView) findViewById(R.id.evaluation_rating_4);
+    @SuppressLint("SetTextI18n")
+    private void updateRatings(String subjectId){
+        List<TextView> eval_textview_array = new ArrayList<TextView>() {
+            {
+                add(findViewById(R.id.evaluation_rating_1));
+                add(findViewById(R.id.evaluation_rating_2));
+                add(findViewById(R.id.evaluation_rating_3));
+                add(findViewById(R.id.evaluation_rating_4));
+            }
+        };
+        List<RatingBar> eval_ratingbar_array = new ArrayList<RatingBar>() {
+            {
+                add(findViewById(R.id.interest_rating));
+                add(findViewById(R.id.work_rating));
+                add(findViewById(R.id.actuality_rating));
+                add(findViewById(R.id.teaching_rating));
+            }
+        };
 
-        final RatingBar interest_rating = (RatingBar) findViewById(R.id.interest_rating);
-        final RatingBar work_rating = (RatingBar) findViewById(R.id.work_rating);
-        final RatingBar actuality_rating = (RatingBar) findViewById(R.id.actuality_rating);
-        final RatingBar teaching_rating = (RatingBar) findViewById(R.id.teaching_rating);
+        for (int i = 0; i < 4; i++) {
+            int index = i;
+            eval_ratingbar_array.get(i).setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+                String number = Integer.toString((int) rating);
+                eval_textview_array.get(index).setText(number);
+            });
+        }
 
-        interest_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            int evalrating1 = (int) rating;
-            String rating1 = String.valueOf(evalrating1);
-            evaluation1.setText(rating1);
-        });
+        String app_name = getResources().getString(R.string.app_name);
+        SharedPreferences prefs = getSharedPreferences(app_name, Context.MODE_PRIVATE);
+        for (int i = 0; i < eval_textview_array.size(); i++) {
+            String key = "eval_" + subjectId + "_" + String.valueOf(i+1);
+            int eval = prefs.getInt(key, -1);
+            if (eval != -1) {
+                eval_textview_array.get(i).setText(Integer.toString(eval));
+                eval_ratingbar_array.get(i).setRating(eval);
+                eval_ratingbar_array.get(i).setIsIndicator(true);
+            }
+        }
 
-        work_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            int evalrating2 = (int) rating;
-            String rating2 = String.valueOf(evalrating2);
-            evaluation2.setText(rating2);
-        });
+        Button send_button = findViewById(R.id.send_button);
+        send_button.setOnClickListener(v -> {
+            for (int i = 0; i < 4; i++)  {
+                int rating = (int) eval_ratingbar_array.get(i).getRating();
+                if (rating != 0) {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    String key = "eval_" + subjectId + "_" + String.valueOf(i+1);
+                    editor.putInt(key, rating);
+                    editor.apply();
+                    eval_ratingbar_array.get(i).setIsIndicator(true);
+                    String category = "category" + String.valueOf(i+1);
+                    APICalls.postRating("testKey2", category, rating);
+                }
+            }
 
-        actuality_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            int evalrating3 = (int) rating;
-            String rating3 = String.valueOf(evalrating3);
-            evaluation3.setText(rating3);
-        });
-
-        teaching_rating.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            int evalrating4 = (int) rating;
-            String rating4 = String.valueOf(evalrating4);
-            evaluation4.setText(rating4);
+            Spinner spinner = findViewById(R.id.facultyDrop);
+            String comment_faculty = spinner.getSelectedItem().toString();
+            EditText plain_text_input = findViewById(R.id.plain_text_input);
+            String comment_content = plain_text_input.getText().toString();
+            if (!comment_content.isEmpty())
+                APICalls.postComment("testKey2", comment_faculty, comment_content);
         });
     }
 }

@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Kasbus</string>
 
+    <string-array name="all_faculties">
+        <item>CHGF</item>
+        <item>EVAF</item>
+        <item>FLF</item>
+        <item>FILF</item>
+        <item>FF</item>
+        <item>GMC</item>
+        <item>IF</item>
+        <item>KNF</item>
+        <item>KOMF</item>
+        <item>MF</item>
+        <item>TSPMI</item>
+        <item>TF</item>
+        <item>VM</item>
+        <item>MIF</item>
+    </string-array>
+
+
     <string name="icon_content_descr">Kasbus clickable icon</string>
     <string name="language">EN/LT</string>
     <string name="filter">Filter out subjects</string>
@@ -22,21 +40,24 @@
     <string name="empty">-</string>
     <string name="delivery_text">Delivery:</string>
     <string name="exam_text">Exam:</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="rating_content_descr">rating</string>
 
     <string name="leave_comment">Leave your comment here...</string>
     <string name="faculty_text">Faculty</string>
     <string name="send_button_text">Send</string>
     <string name="reminder_text">Remember, all of us expect to find valuable and constructive feedback, not just some random spamą</string>
-    
-    <string name="select_bus_by_text">SELECT BUS BY:</string>
-    <string name="faculties_text">Faculties:</string>
-    <string name="mode_text">Delivery:</string>
-    <string name="remote_text">Remote</string>
-    <string name="on_site_text">On site</string>
-    <string name="hybrid_text">Hybrid</string>
-    <string name="any_text">Any</string>
-    <string name="language_text">Language:</string>
-    <string name="both_text">BOTH</string>
-    <string name="done_text">Done</string>
-    <string name="empty_text">Empty</string>
+
+    <string name="faculties">Faculties:</string>
+    <string name="delivery">Delivery:</string>
+    <string name="remote">Remote</string>
+    <string name="on_site">On site</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="any">Any</string>
+    <string name="language_filter">Language:</string>
+    <string name="english">English</string>
+    <string name="lithuanian">Lithuanian</string>
+    <string name="done">Done</string>
+    <string name="empty_filter">Default</string>
 </resources>

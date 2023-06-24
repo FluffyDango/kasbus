@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Kasbus</string>
+    <string name="app_name">Kasbus</string>
 
-    <string name="icon_content_descr" translatable="false">Kasbus paspaudžiamas piktograma</string>
-    <string name="language" translatable="false">EN/LT</string>
-    <string name="filter" translatable="false" >Filtruoti dalykus</string>
-    <string name="search_bar_hint" translatable="false">Ieškoti dalykų</string>
-    <string name="loading" translatable="false">Kraunama</string>
-    <string name="loading_failed" translatable="false">Kraunant įvyko klaida</string>
-    <string name="retry_button" translatable="false">Pakartoti</string>
+    <string name="icon_content_descr">Kasbus paspaudžiamas piktograma</string>
+    <string name="language">EN/LT</string>
+    <string name="filter" >Filtruoti dalykus</string>
+    <string name="search_bar_hint">Ieškoti dalykų</string>
+    <string name="loading">Kraunama</string>
+    <string name="loading_failed">Kraunant įvyko klaida</string>
+    <string name="retry_button">Pakartoti</string>
 
-    <string name="amount_of_credits" translatable="false">Kreditų skaičius:</string>
-    <string name="subject_language" translatable="false">Kalba:</string>
-    <string name="amount_of_hours_text" translatable="false">Valandų skaičius:</string>
-    <string name="go_to_site" translatable="false">Eiti į oficialią svetainę</string>
-    <string name="interest_text" translatable="false">Dominavimas</string>
-    <string name="your_evaluation" translatable="false">Jūsų įvertinimas:</string>
-    <string name="amount_of_work_text" translatable="false">Darbo apimtis</string>
-    <string name="actuality" translatable="false">Aktualumas</string>
-    <string name="teaching" translatable="false">Mokymas</string>
+    <string name="amount_of_credits">Kreditų skaičius:</string>
+    <string name="subject_language">Kalba:</string>
+    <string name="amount_of_hours_text">Valandų skaičius:</string>
+    <string name="go_to_site">Eiti į oficialią svetainę</string>
+    <string name="interest_text">Įdomumas</string>
+    <string name="your_evaluation">Jūsų įvertinimas:</string>
+    <string name="amount_of_work_text">Darbo apimtis</string>
+    <string name="actuality">Aktualumas</string>
+    <string name="teaching">Mokymas</string>
     <string name="empty">-</string>
     <string name="delivery_text">Įgyvendinimo forma:</string>
-    <string name="exam_text">Vertinimo metodai:</string>
+    <string name="exam_text">Egzaminas:</string>
+    <string name="yes">yra</string>
+    <string name="no">nėra</string>
+    <string name="rating_content_descr">vertinimas</string>
 
-    <string name="leave_comment" translatable="false">Palikite savo komentarą čia</string>
-    <string name="faculty_text" translatable="false">Fakultetas</string>
-    <string name="send_button_text" translatable="false">Siųsti</string>
-    <string name="reminder_text" translatable="false">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spamą</string>
+    <string name="leave_comment">Palikite savo komentarą čia</string>
+    <string name="faculty_text">Fakultetas</string>
+    <string name="send_button_text">Siųsti</string>
+    <string name="reminder_text">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spamą</string>
 
-    <string name="select_bus_by_text">PASIRINKTI BUS PAGAL:</string>
-    <string name="faculties_text">Fakultetai:</string>
-    <string name="mode_text">Būdas:</string>
-    <string name="remote_text">Nuotolinė</string>
-    <string name="on_site_text">Auditorinė</string>
-    <string name="hybrid_text">Auditorinė/nuotolinė</string>
-    <string name="any_text">Bet koks</string>
-    <string name="language_text">Kalba:</string>
-    <string name="both_text">ABU</string>
-    <string name="done_text">Patvirtinti</string>
-    <string name="empty_text">Išvalyti</string>
+    <string name="faculties">Fakultetai:</string>
+    <string name="delivery">Paskaitos:</string>
+    <string name="remote">nuotolines</string>
+    <string name="on_site">auditorines</string>
+    <string name="hybrid">hibridinis</string>
+    <string name="any">nesvarbu</string>
+    <string name="language_filter">Kalba:</string>
+    <string name="english">anglų</string>
+    <string name="lithuanian">lietuvių</string>
+    <string name="done">Patvirtinti</string>
+    <string name="empty_filter">Išvalyti</string>
 </resources>
