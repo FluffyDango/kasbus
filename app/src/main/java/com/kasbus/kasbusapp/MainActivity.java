@@ -1,11 +1,16 @@
 package com.kasbus.kasbusapp;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.kasbus.kasbusapp.API.*;
@@ -28,21 +34,101 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SubjectCallback {
 
+    private SharedPreferences filter_prefs;
+    private SharedPreferences general_prefs;
 
-    @SuppressLint("ApplySharedPref")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = initPreferences();
-        changeLocale(prefs);
+        general_prefs = getSharedPreferences("kasbus", Context.MODE_PRIVATE);
+        initPreferences();
+        filter_prefs = getSharedPreferences("filter", Context.MODE_PRIVATE);
+        changeLocale();
         setContentView(R.layout.activity_main);
 
-        setFilterOnClick();
+        String lang = general_prefs.getString("language", "");
         APICalls.setSubjectCallback(this);
-        String lang = prefs.getString("language", "");
         APICalls.fetchSubjects(lang);
+
+        setFilterOnClick();
         setButtonText(lang);
-        setLangButtonOnClick(prefs);
+        setLangButtonOnClick();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        LinearLayout search_bar_layout = findViewById(R.id.search_and_filter);
+        SearchView searchView = findViewById(R.id.searchView);
+        searchView.setQuery("", false);
+        search_bar_layout.requestFocus();
+    }
+
+
+    private List<Subject> filterSubjects() {
+        List<Subject> current_subjects = APICalls.getSubjects();
+        List<Subject> filtered_subjects = new ArrayList<>(current_subjects);
+        filtered_subjects.addAll(current_subjects);
+
+        filterSubjectsByFaculty(filtered_subjects);
+        filterSubjectsByDelivery(filtered_subjects);
+        filterSubjectsByLanguage(filtered_subjects);
+
+        return filtered_subjects;
+    }
+
+    // subjects are passed by reference so they are changed
+    private void filterSubjectsByFaculty(List<Subject> subjects) {
+        String[] faculties = getResources().getStringArray(R.array.all_faculties);
+        for (int i = 0; i < faculties.length; i++) {
+            String key = "faculty_filter_" + String.valueOf(i + 1);
+            if (filter_prefs.getBoolean(key, false)) {
+                for (int j = 0; j < subjects.size(); j++) {
+                    String faculty = subjects.get(j).getFaculty();
+                    if (faculty.equals(faculties[i])) {
+                        subjects.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+    }
+
+    // subjects are passed by reference so they are changed
+    private void filterSubjectsByDelivery(List<Subject> subjects) {
+        String sel_delivery = filter_prefs.getString("filter_delivery", "");
+        if (sel_delivery.equals("any")) {
+            return;
+        } else if (sel_delivery.isEmpty()) {
+            Log.d("kasbus", "filter_delivery is empty");
+        } else {
+            for (int i = 0; i < subjects.size(); i++) {
+                String subject_language = subjects.get(i).getDelivery();
+                if (!subject_language.equals(sel_delivery)) {
+                    subjects.remove(i);
+                    i--;
+                }
+            }
+        }
+    }
+
+    // subjects are passed by reference so they are changed
+    private void filterSubjectsByLanguage(List<Subject> subjects) {
+        String sel_language = filter_prefs.getString("filter_language", "");
+        if (sel_language.equals("any")) {
+            return;
+        } else if (sel_language.isEmpty()) {
+            Log.d("kasbus", "filter_language is empty");
+        } else {
+            for (int i = 0; i < subjects.size(); i++) {
+                String subject_language = subjects.get(i).getLanguage();
+                if (!subject_language.equals(sel_language)) {
+                    subjects.remove(i);
+                    i--;
+                }
+            }
+        }
     }
 
     @Override
@@ -64,24 +150,39 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
-                if (APICalls.getSubjects() != null) {
-                    List<Subject> filtered_list = searchSubjects(text, APICalls.getSubjects());
-                    if (filtered_list == null) {
-                        Log.e("kasbus",
-                                "searchSubjects returned null, subjects array is likely null");
-                        return false;
-                    }
-                    adapter.setSubjects(filtered_list);
-                } else  {
-                    Log.e("kasbus", "Subjects are null in APICalls");
-                }
+                searchSubjects(text);
                 return false;
+//                if (APICalls.getSubjects() != null) {
+//                    List<Subject> filtered_list = searchSubjects(text, adapter);
+//                    if (filtered_list == null) {
+//                        Log.e("kasbus",
+//                                "searchSubjects returned null, subjects array is likely null");
+//                        return false;
+//                    }
+////                    adapter.setSubjects(filtered_list);
+////                    adapter.notifyDataSetChanged();
+//                } else  {
+//                    Log.e("kasbus", "Subjects are null in APICalls");
+//                }
+//                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String text) {
-                if (text.isEmpty() && APICalls.getSubjects() != null) {
-                    adapter.setSubjects(APICalls.getSubjects());
+                if (text.isEmpty()) {
+                    List<Subject> subjects;
+                    if (APICalls.getFilteredSubjects() != null) {
+                        subjects = APICalls.getFilteredSubjects();
+                    } else if (APICalls.getSubjects() != null) {
+                        subjects = APICalls.getSubjects();
+                    } else {
+                        return true;
+                    }
+
+                    SubjectRecycleViewAdapter adapter = (SubjectRecycleViewAdapter) rv_subjects.getAdapter();
+                    assert adapter != null;
+
+                    adapter.setSubjects(subjects);
                 }
                 return true;
             }
@@ -107,21 +208,35 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
     /**
      *
      * @param query the thing we want to search for
-     * @param subjects the list of subjects to filter out
-     * @return null or filtered subjects
      *
      */
-    private List<Subject> searchSubjects(String query, List<Subject> subjects) {
-        if (subjects == null)
-            return null;
+    private void searchSubjects(String query) {
+        RecyclerView rv_subjects = findViewById(R.id.bus_list);
+        SubjectRecycleViewAdapter adapter = (SubjectRecycleViewAdapter) rv_subjects.getAdapter();
+        assert adapter != null;
 
+        List<Subject> subjects;
+        if (APICalls.getFilteredSubjects() != null) {
+            subjects = APICalls.getFilteredSubjects();
+        } else if (APICalls.getSubjects() != null) {
+            subjects = APICalls.getSubjects();
+        } else {
+            return;
+        }
+
+        List<Integer> update_index = new ArrayList<>(16);
         List<Subject> filteredSubjects = new ArrayList<>();
-        for (Subject subject : subjects) {
-            if (subject.getName().toLowerCase().contains(query.toLowerCase())) {
-                filteredSubjects.add(subject);
+        for (int i = 0; i < subjects.size(); i++) {
+            String name = subjects.get(i).getName().toLowerCase();
+            if (name.contains(query.toLowerCase())) {
+                update_index.add(i);
+                filteredSubjects.add(subjects.get(i));
             }
         }
-        return filteredSubjects;
+        adapter.setSubjects(filteredSubjects);
+        for (int i = 0; i < update_index.size(); i++) {
+            adapter.notifyItemChanged(update_index.get(i));
+        }
     }
 
     private String getNextLanguage(String current_language) {
@@ -150,17 +265,37 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
     private void setFilterOnClick() {
         ImageButton filter = findViewById(R.id.filter);
         filter.setOnClickListener(view -> {
-            Context context = view.getContext();
-            Intent intent = new Intent(context, FilterActivity.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(this, FilterActivity.class);
+            launchFilterForResult.launch(intent);
         });
     }
 
-    private void setLangButtonOnClick(SharedPreferences prefs) {
+    @SuppressLint("NotifyDataSetChanged")
+    ActivityResultLauncher<Intent> launchFilterForResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    assert data != null;
+                    if (data.getBooleanExtra("need_to_filter", false)) {
+                        List<Subject> filtered_subjects = filterSubjects();
+                        APICalls.setFilteredSubjects(filtered_subjects);
+
+                        RecyclerView rv_subjects = findViewById(R.id.bus_list);
+                        SubjectRecycleViewAdapter adapter = new SubjectRecycleViewAdapter(filtered_subjects);
+                        rv_subjects.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+
+    private void setLangButtonOnClick() {
         Button lang_button = findViewById(R.id.lang_button);
         lang_button.setOnClickListener(view -> {
+            APICalls.setSubjects(null);
+            APICalls.setFilteredSubjects(null);
 
-            String current_language = prefs.getString("language", "");
+            String current_language = general_prefs.getString("language", "");
             if (current_language.isEmpty()) {
                 Log.e("kasbus",
                         "Failed to get language: " + current_language);
@@ -173,13 +308,13 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
                 return;
             }
 
-            SharedPreferences.Editor editor = prefs.edit();
+            SharedPreferences.Editor editor = general_prefs.edit();
             APICalls.fetchSubjects(next_language);
             editor.putString("language", next_language);
             editor.apply();
             setButtonText(next_language);
 
-            changeLocale(prefs);
+            changeLocale();
 
             // Reload activity to update language
             finish();
@@ -188,19 +323,16 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
     }
 
     @SuppressLint("ApplySharedPref")
-    private SharedPreferences initPreferences() {
-        String app_name = getResources().getString(R.string.app_name);
-        SharedPreferences prefs = getSharedPreferences(app_name, Context.MODE_PRIVATE);
-        if (!prefs.contains("language")) {
-            SharedPreferences.Editor editor = prefs.edit();
+    private void initPreferences() {
+        if (!general_prefs.contains("language")) {
+            SharedPreferences.Editor editor = general_prefs.edit();
             editor.putString("language", "en");
             editor.commit();
         }
-        return prefs;
     }
 
-    private void changeLocale(SharedPreferences prefs) {
-        String language = prefs.getString("language", "");
+    private void changeLocale() {
+        String language = general_prefs.getString("language", "");
         if (!language.isEmpty()) {
             Locale lithuanianLocale = new Locale(language);
             Locale.setDefault(lithuanianLocale);

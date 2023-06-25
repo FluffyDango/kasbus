@@ -165,7 +165,7 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
                 case "online":
                     delivery_text = res.getString(R.string.remote);
                     break;
-                case "face":
+                case "live":
                     delivery_text = res.getString(R.string.on_site);
                     break;
                 default:
@@ -242,14 +242,14 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
         send_button.setOnClickListener(v -> {
             for (int i = 0; i < 4; i++)  {
                 int rating = (int) eval_ratingbar_array.get(i).getRating();
-                if (rating != 0) {
+                if (rating != 0 && !eval_ratingbar_array.get(i).isIndicator()) {
                     SharedPreferences.Editor editor = prefs.edit();
                     String key = "eval_" + subjectId + "_" + String.valueOf(i+1);
                     editor.putInt(key, rating);
                     editor.apply();
                     eval_ratingbar_array.get(i).setIsIndicator(true);
                     String category = "category" + String.valueOf(i+1);
-                    APICalls.postRating("testKey2", category, rating);
+                    APICalls.postRating(subjectId, category, rating);
                 }
             }
 
@@ -258,7 +258,7 @@ public class SubjectActivity extends AppCompatActivity implements PostCallback, 
             EditText plain_text_input = findViewById(R.id.plain_text_input);
             String comment_content = plain_text_input.getText().toString();
             if (!comment_content.isEmpty())
-                APICalls.postComment("testKey2", comment_faculty, comment_content);
+                APICalls.postComment(subjectId, comment_faculty, comment_content);
         });
     }
 }

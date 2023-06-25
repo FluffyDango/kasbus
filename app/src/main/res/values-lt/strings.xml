@@ -18,7 +18,7 @@
     <string name="your_evaluation">Jūsų įvertinimas:</string>
     <string name="amount_of_work_text">Darbo apimtis</string>
     <string name="actuality">Aktualumas</string>
-    <string name="teaching">Mokymas</string>
+    <string name="teaching">Dėstymas</string>
     <string name="empty">-</string>
     <string name="delivery_text">Įgyvendinimo forma:</string>
     <string name="exam_text">Egzaminas:</string>
@@ -31,13 +31,13 @@
     <string name="send_button_text">Siųsti</string>
     <string name="reminder_text">Atminkite, mes tikimės rasti vertingų ir konstruktyvių atsiliepimų, o ne tiesiog atsitiktinį spamą</string>
 
-    <string name="faculties">Fakultetai:</string>
-    <string name="delivery">Paskaitos:</string>
+    <string name="faculties">Fakultetai</string>
+    <string name="delivery">Paskaitos</string>
     <string name="remote">nuotolines</string>
     <string name="on_site">auditorines</string>
     <string name="hybrid">hibridinis</string>
     <string name="any">nesvarbu</string>
-    <string name="language_filter">Kalba:</string>
+    <string name="language_filter">Kalba</string>
     <string name="english">anglų</string>
     <string name="lithuanian">lietuvių</string>
     <string name="done">Patvirtinti</string>

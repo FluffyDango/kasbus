@@ -15,7 +15,7 @@
         <item>TSPMI</item>
         <item>TF</item>
         <item>VM</item>
-        <item>MIF</item>
+        <item>ŠA</item>
     </string-array>
 
 
@@ -49,13 +49,13 @@
     <string name="send_button_text">Send</string>
     <string name="reminder_text">Remember, all of us expect to find valuable and constructive feedback, not just some random spamą</string>
 
-    <string name="faculties">Faculties:</string>
+    <string name="faculties">Faculties</string>
     <string name="delivery">Delivery:</string>
     <string name="remote">Remote</string>
     <string name="on_site">On site</string>
     <string name="hybrid">Hybrid</string>
     <string name="any">Any</string>
-    <string name="language_filter">Language:</string>
+    <string name="language_filter">Language</string>
     <string name="english">English</string>
     <string name="lithuanian">Lithuanian</string>
     <string name="done">Done</string>

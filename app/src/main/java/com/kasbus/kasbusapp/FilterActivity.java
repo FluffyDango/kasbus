@@ -2,10 +2,12 @@ package com.kasbus.kasbusapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,12 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterActivity extends Activity {
-
     private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(Bundle.EMPTY);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_screen);
 
         prefs = getSharedPreferences("filter", Context.MODE_PRIVATE);
@@ -33,15 +34,19 @@ public class FilterActivity extends Activity {
 
         Button doneButton = findViewById(R.id.doneButton);
         Button emptyButton = findViewById(R.id.emptyButton);
-
         doneButton.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.putExtra("need_to_filter", true);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         });
         emptyButton.setOnClickListener(v -> {
             prefs.edit().clear().apply();
-            setFacultyCheckboxes();
-            setDeliveryGroup();
-            setLanguageGroup();
+            new Handler().postDelayed(() -> {
+                setFacultyCheckboxes();
+                setDeliveryGroup();
+                setLanguageGroup();
+            }, 50);
         });
     }
 
@@ -62,26 +67,32 @@ public class FilterActivity extends Activity {
                 checkbox_list.get(i).setTextColor(Color.WHITE);
                 checkbox_list.get(i).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
-                String key = "faculty_filter" + Integer.toString(i);
+                String key = "faculty_filter_" + Integer.toString(i+1);
                 checkbox_list.get(i).setChecked(!prefs.contains(key));
                 checkbox_list.get(i).setOnCheckedChangeListener((buttonView, isChecked) -> {
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putInt(key, buttonView.getId());
+                    editor.putBoolean(key, !isChecked);
                     editor.apply();
                 });
-
                 grid_faculties.addView(checkbox_list.get(i));
             }
         } else {
-            for (int i = 0; i < grid_faculties.getChildCount(); i++) {
+            for (int i = 0; i < faculties.length; i++) {
+                String key = "faculty_filter_" + Integer.toString(i+1);
                 CheckBox button = (CheckBox) grid_faculties.getChildAt(i);
-                button.setChecked(true);
+                button.setOnCheckedChangeListener(null); // Remove previous listener temporarily
+                button.setChecked(!prefs.contains(key));
+                button.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean(key, !isChecked);
+                    editor.apply();
+                });
             }
         }
     }
 
     private void setDeliveryGroup() {
-        int selected_delivery = prefs.getInt("filter_delivery", 0);
+        int selected_delivery = prefs.getInt("filter_del_button_id", 0);
         RadioButton delivery_button;
         if (selected_delivery != 0) {
             delivery_button = findViewById(selected_delivery);
@@ -92,14 +103,30 @@ public class FilterActivity extends Activity {
 
         RadioGroup delivery_group = findViewById(R.id.delivery_group);
         delivery_group.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton button = findViewById(checkedId);
+            String sel_button_text = button.getText().toString();
+            String remote = getResources().getString(R.string.remote);
+            String on_site = getResources().getString(R.string.on_site);
+            String hybrid = getResources().getString(R.string.hybrid);
+            String delivery;
+            if(sel_button_text.equals(remote)) {
+                delivery = "online";
+            } else if(sel_button_text.equals(on_site)) {
+                delivery = "live";
+            } else if(sel_button_text.equals(hybrid)) {
+                delivery = "blended";
+            } else {
+                delivery = "any";
+            }
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("filter_delivery", checkedId);
+            editor.putString("filter_delivery", delivery);
+            editor.putInt("filter_del_button_id", checkedId);
             editor.apply();
         });
     }
 
     private void setLanguageGroup() {
-        int selected_language = prefs.getInt("filter_language", 0);
+        int selected_language = prefs.getInt("filter_lang_button_id", 0);
         RadioButton lang_button;
         if (selected_language != 0) {
             lang_button = findViewById(selected_language);
@@ -110,8 +137,21 @@ public class FilterActivity extends Activity {
 
         RadioGroup language_group = findViewById(R.id.language_group);
         language_group.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton button = findViewById(checkedId);
+            String sel_button_text = button.getText().toString();
+            String english = getResources().getString(R.string.english);
+            String lithuanian = getResources().getString(R.string.lithuanian);
+            String lang;
+            if (sel_button_text.equals(english)) {
+                lang = "en";
+            } else if (sel_button_text.equals(lithuanian)) {
+                lang = "lt";
+            } else {
+                lang = "any";
+            }
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt("filter_language", checkedId);
+            editor.putString("filter_language", lang);
+            editor.putInt("filter_lang_button_id", checkedId);
             editor.apply();
         });
     }

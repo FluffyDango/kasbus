@@ -15,20 +15,24 @@ import retrofit2.Response;
 
 public class APICalls {
     private static List<Subject> subjects;
+    private static List<Subject> filtered_subjects;
     private final static APIInterface api_interface = APIClient.getClient().create(APIInterface.class);
     private static SubjectCallback subject_callback;
     private static GetCallback get_callback;
     private static PostCallback post_callback;
 
     public static void setSubjects(List<Subject> subjects_list) {
-        if (subjects == null) {
-            subjects = subjects_list;
-        } else {
-            Log.d("API", "subjects are already set");
-        }
+        subjects = subjects_list;
     }
     public static List<Subject> getSubjects() {
         return subjects;
+    }
+
+    public static void setFilteredSubjects(List<Subject> subjects_list) {
+        filtered_subjects = subjects_list;
+    }
+    public static List<Subject> getFilteredSubjects() {
+        return filtered_subjects;
     }
 
     public static void setSubjectCallback(SubjectCallback subject_cb) {

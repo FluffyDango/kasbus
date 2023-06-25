@@ -76,4 +76,7 @@ public class SubjectRecycleViewAdapter extends RecyclerView.Adapter<SubjectRecyc
     public int getItemCount() {
         return subjects.size();
     }
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
 }
