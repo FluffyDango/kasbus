@@ -152,19 +152,6 @@ public class MainActivity extends AppCompatActivity implements SubjectCallback {
             public boolean onQueryTextSubmit(String text) {
                 searchSubjects(text);
                 return false;
-//                if (APICalls.getSubjects() != null) {
-//                    List<Subject> filtered_list = searchSubjects(text, adapter);
-//                    if (filtered_list == null) {
-//                        Log.e("kasbus",
-//                                "searchSubjects returned null, subjects array is likely null");
-//                        return false;
-//                    }
-////                    adapter.setSubjects(filtered_list);
-////                    adapter.notifyDataSetChanged();
-//                } else  {
-//                    Log.e("kasbus", "Subjects are null in APICalls");
-//                }
-//                return false;
             }
 
             @Override
